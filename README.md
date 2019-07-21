@@ -40,13 +40,13 @@ To see a list of mappings press `,fm` in vim's normal mode.
 
 ### Plugins
 
-A list of plugins can be found at `$location/plugins.vim`
+A list of plugins can be found at `plugins.vim`
 
-Plugin mappings and configurations are found at `$location/plugin_configs.vim`
+Plugin mappings and configurations are found at `plugin_configs.vim`
 
 ### Mappings
 
-A list of mappings (plugin-independent) can be found at `$location/mappings.vim`
+A list of mappings (plugin-independent) can be found at `mappings.vim`
 
 ### Customizations
 
@@ -55,4 +55,4 @@ The file is automatically loaded after write, but you can also press `,R`(comma,
 
 ### Machine dependent settings
 
-Edit the file `$location/platform.vim` to add settings that are specific to that machine. Any changes are ignored by git.
+Edit the file `platform.vim` to add settings that are specific to that machine. Any changes are ignored by git.
