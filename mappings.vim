@@ -60,7 +60,7 @@ nmap <silent> <leader>w :w<cr>
 " edit vimrc
 map <leader>e :e! $VIM_PREFIX/configs.vim<cr>
 " reload vimrc on (intentional) write
-autocmd! BufWritePost configs.vim if expand('%') ==# expand('$VIM_PREFIX') . '/configs.vim' | source $VIM_PREFIX/configs.vim | endif
+autocmd BufWritePost configs.vim if expand('%') ==# $VIM_PREFIX . '/configs.vim' | source $VIM_PREFIX/configs.vim | endif
 
 " read vimrc
 map <leader>R :source $VIM_PREFIX/configs.vim<cr>
