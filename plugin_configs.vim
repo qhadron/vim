@@ -178,6 +178,12 @@ augroup s:YCM_Mappings
 				\| autocmd! s:YCM_Mappings
 augroup END
 
+""""""""""""""""""""""""""""""
+" => ctrlp
+""""""""""""""""""""""""""""""
+" Only using ctrlp for mru, so remove the key bindings
+let g:ctrlp_map = ''
+let g:ctrlp_cmd = ''
 
 """"""""""""""""""""""""""""""
 " => fzf
@@ -188,18 +194,70 @@ let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g ""'
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 0
 
+" helpers to find files
+" {{{ The following code taken from https://github.com/junegunn/fzf.vim/blob/359a80e3a34aacbd5257713b6a88aa085337166f/autoload/fzf/vim.vim
+
+function! s:sort_buffers(...)
+  let [b1, b2] = map(copy(a:000), 'get(g:fzf#vim#buffers, v:val, v:val)')
+  " Using minus between a float and a number in a sort function causes an error
+  return b1 < b2 ? 1 : -1
+endfunction
+
+function! s:buflisted_sorted()
+  return sort(filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"'), 's:sort_buffers')
+endfunction
+
+function! s:buffer_list()
+  return map(
+    \ filter([expand('%')], 'len(v:val)')
+    \   + filter(map(s:buflisted_sorted(), 'bufname(v:val)'), 'len(v:val)'),
+    \ 'fnamemodify(v:val, ":~:.")')
+endfunction
+
+function! s:old_files()
+  return map(
+    \ filter(copy(v:oldfiles), "filereadable(fnamemodify(v:val, ':p'))"),
+    \ 'fnamemodify(v:val, ":~:.")')
+endfunction
+
+" }}}
+
+" if ctrl+f should be in fullscreen or not
+let g:c_f_fullscreen=1
+
+" Source option explanation
+" [line 1] use bash for input redirection & process substitution
+" [line 1] use awk to remove repeated entries [https://stackoverflow.com/a/11532197]
+" [line 2] current file + buffer list
+" [line 3] files in current directory
+" [line 4] old files
+command! FZFMixed call fzf#run(fzf#wrap('find-all', fzf#vim#with_preview({
+			\ 'source': 'bash -c '' awk \!x\[\$0]\+\+ '.
+			\ '<(tr "\r" "\n" <<<"'.join(s:buffer_list(), "\r").'") '.
+			\ '<('.$FZF_DEFAULT_COMMAND.') '.
+			\ '<(tr "\r" "\n" <<<"'. join(ctrlp#mrufiles#list(), "\r") .'") '.
+			\ '''',
+			\ 'down': '50%',
+			\ 'options': '--no-sort --multi --prompt "Choice> " --header-lines 1',
+			\}), g:c_f_fullscreen))
+" the 1 above means fullscreen
+
 " search for regex (grep)
 nnoremap <c-g> :Ag<space>
 
 " c-f to find files
-nnoremap <silent> <c-f> :Files<CR>
+nnoremap <silent> <c-f> :FZFMixed<CR>
 
 " Find mappings
 nmap <silent> <leader>fm <plug>(fzf-maps-n)
 " Find files
 nnoremap <silent> <leader>ff :Files<CR>
+" Find git files
+nnoremap <silent> <leader>fF :GFiles<CR>
 " Find buffers
 nnoremap <silent> <leader>fb :Buffers<CR>
+" Find history (open bufferes and most recently used (v:oldfiles))
+nnoremap <silent> <leader>fh :History<CR>
 " Find commits
 nnoremap <silent> <leader>fg :Commits<CR>
 " Find commands
@@ -209,7 +267,7 @@ nnoremap <silent> <leader>fl :BLines<CR>
 " Find global lines
 nnoremap <silent> <leader>fL :Lines<CR>
 " Find filetypes
-nnoremap <silent> <leader>fL :Lines<CR>
+nnoremap <silent> <leader>ft :Filetypes<CR>
 
 """"""""""""""""""""""""""""""
 " => goyo
