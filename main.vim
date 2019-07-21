@@ -17,3 +17,9 @@ try
 	source $VIM_PREFIX/configs.vim
 catch
 endtry
+
+" platform dependent configs
+try
+	source $VIM_PREFIX/platform.vim
+catch
+endtry

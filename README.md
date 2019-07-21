@@ -53,3 +53,6 @@ A list of mappings (plugin-independent) can be found at `$location/mappings.vim`
 In vim, press `,e` to change the default configuration file.
 The file is automatically loaded after write, but you can also press `,R`(comma, shift + R) to reload the file.
 
+### Machine dependent settings
+
+Edit the file `$location/platform.vim` to add settings that are specific to that machine. Any changes are ignored by git.
