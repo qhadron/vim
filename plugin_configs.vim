@@ -1,4 +1,8 @@
 """"""""""""""""""""""""""""""
+" => global stuff
+""""""""""""""""""""""""""""""
+let s:ag_command = 'ag --vimgrep --smart-case'
+""""""""""""""""""""""""""""""
 " => bufExplorer plugin
 """"""""""""""""""""""""""""""
 let g:bufExplorerDefaultHelp=1
@@ -116,13 +120,15 @@ let g:syntastic_check_on_wq = 0
 """"""""""""""""""""""""""""""
 " => git gutter
 """"""""""""""""""""""""""""""
+" disable by default
+let g:gitgutter_enabled=0
 " add binding to toggle for the buffer
-nnoremap <silent> <leader>g :GitGutterBufferToggle<cr>
+nnoremap <silent> <leader>g :GitGutterToggle<cr>
 " enable highlighting by default
 let g:gitgutter_highlight_lines = 1
-" use ag if available
+" use ag instead of grep
 if executable('ag')
-	let g:gitgutter_grep = 'ag --vimgrep --smart-case'
+	let g:gitgutter_grep = 'ag'
 endif
 
 
@@ -130,7 +136,7 @@ endif
 " => YouCompleteMe
 """"""""""""""""""""""""""""""
 " command to enable YCM (triggers vim-plug)
-command! YCM echo
+command! YCM call plug#load('YouCompleteMe')
 
 " YouCompleteMe configs
 if len(glob('~/.ycm.py'))
@@ -143,21 +149,27 @@ let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_auto_trigger = 1
 
+let s:ycm_keybinds_added = 0
 function! s:addYcmMappings() 
-	nnoremap <c-c>D :YcmDiags<CR>
-	nnoremap <c-F5> :YcmForceCompileAndDiagnostics<CR>
-	nnoremap <c-c><F5> :YcmRestartServer<CR>
-	nnoremap <c-c>g :YcmCompleter GoTo<CR>
-	nnoremap <c-c>gd :YcmCompleter GoToDeclaration<CR>
-	nnoremap <c-c>t :YcmCompleter GetType<CR>
-	nnoremap <c-c>d :YcmCompleter GetDoc<CR>
-	nnoremap <c-c>f :YcmCompleter FixIt<CR>
-	nnoremap <c-c><c-f> :YcmCompleter Format<CR>
-	nnoremap <c-c>o :YcmCompleter OrganizeImports<CR>
-	nnoremap <F2> :YcmCompleter RefactorRename 
-	let g:ycm_key_detailed_diagnostics = '<c-c><c-d>'
-	let g:ycm_key_invoke_completion = '<C-Space>'
-	echom 'YouCompleteMe loaded!'
+	if ! s:ycm_keybinds_added
+		nnoremap <c-c>D :YcmDiags<CR>
+		nnoremap <c-F5> :YcmForceCompileAndDiagnostics<CR>
+		nnoremap <c-c><F5> :YcmRestartServer<CR>
+		nnoremap <c-c>g :YcmCompleter GoTo<CR>
+		nnoremap <c-c>gd :YcmCompleter GoToDeclaration<CR>
+		nnoremap <c-c>t :YcmCompleter GetType<CR>
+		nnoremap <c-c>d :YcmCompleter GetDoc<CR>
+		nnoremap <c-c>f :YcmCompleter FixIt<CR>
+		nnoremap <c-c><c-f> :YcmCompleter Format<CR>
+		nnoremap <c-c>o :YcmCompleter OrganizeImports<CR>
+		nnoremap <F2> :YcmCompleter RefactorRename 
+		let g:ycm_key_detailed_diagnostics = '<c-c><c-d>'
+		let g:ycm_key_invoke_completion = '<C-Space>'
+		if v:vim_did_enter
+			echom 'YouCompleteMe loaded!'
+		endif
+		let s:ycm_keybinds_added = 1
+	endif
 endfunction	
 
 " YouCompleteMe mappings
@@ -170,6 +182,9 @@ augroup END
 """"""""""""""""""""""""""""""
 " => fzf
 """"""""""""""""""""""""""""""
+" change fzf default command to do better searching
+let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g ""'
+
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 0
 

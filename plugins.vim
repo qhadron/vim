@@ -102,7 +102,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" load ycm when it's needed
 	augroup load_ycm
 	  autocmd!
-	  autocmd FileType js,cpp,python call plug#load('YouCompleteMe')
+	  autocmd FileType js,c,cpp,python call plug#load('YouCompleteMe')
 						 \| autocmd! load_ycm
 	augroup END
 
