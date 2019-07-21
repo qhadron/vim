@@ -176,3 +176,11 @@ try
 	set clipboard-=autoselect
 catch
 endtry
+
+
+""""""""""""""""""""""""""""""
+" => shell syntax folding
+""""""""""""""""""""""""""""""
+" shell (sh) syntax folding
+let g:sh_fold_enabled=5 " &1 is functions, &2 is heredoc, &4 is ifdofor
+
