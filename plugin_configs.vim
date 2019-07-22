@@ -130,6 +130,8 @@ let g:gitgutter_highlight_lines = 1
 if executable('ag')
 	let g:gitgutter_grep = 'ag'
 endif
+" set update time to make changes realtime
+set updatetime=100
 
 
 """"""""""""""""""""""""""""""
