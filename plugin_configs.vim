@@ -181,13 +181,6 @@ augroup s:YCM_Mappings
 augroup END
 
 """"""""""""""""""""""""""""""
-" => ctrlp
-""""""""""""""""""""""""""""""
-" Only using ctrlp for mru, so remove the key bindings
-let g:ctrlp_map = ''
-let g:ctrlp_cmd = ''
-
-""""""""""""""""""""""""""""""
 " => fzf
 """"""""""""""""""""""""""""""
 " change fzf default command to do better searching
@@ -196,66 +189,49 @@ let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g ""'
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 0
 
-" helpers to find files
-" {{{ The following code taken from https://github.com/junegunn/fzf.vim/blob/359a80e3a34aacbd5257713b6a88aa085337166f/autoload/fzf/vim.vim
+" set fzf layout (and open fzf in terminal window for the mappings)
+let g:fzf_layout = {'up': '30%'}
 
-function! s:sort_buffers(...)
-  let [b1, b2] = map(copy(a:000), 'get(g:fzf#vim#buffers, v:val, v:val)')
-  " Using minus between a float and a number in a sort function causes an error
-  return b1 < b2 ? 1 : -1
+" fzf mapping to switch search type
+" https://github.com/junegunn/fzf.vim/issues/289#issuecomment-447560813
+function! s:fzf_next(idx)
+  let commands = ['fzf#vim#buffers', 'fzf#vim#files', '<sid>find_all_files']
+  let cmd='call '.commands[a:idx].'("", fzf#vim#with_preview('.string(g:fzf_layout).', "right:hidden", "?"), 0)'
+  execute cmd
+  let next = (a:idx + 1) % len(commands)
+  execute 'tnoremap <buffer> <silent> <c-f> <c-\><c-n>:q!<cr>:sleep 1m<cr>:silent call <sid>fzf_next('.next.')<cr>'
 endfunction
 
-function! s:buflisted_sorted()
-  return sort(filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"'), 's:sort_buffers')
-endfunction
+command! FZFCycle call <sid>fzf_next(0)
 
-function! s:buffer_list()
-  return map(
-    \ filter([expand('%')], 'len(v:val)')
-    \   + filter(map(s:buflisted_sorted(), 'bufname(v:val)'), 'len(v:val)'),
-    \ 'fnamemodify(v:val, ":~:.")')
-endfunction
-
-function! s:old_files()
-  return map(
-    \ filter(copy(v:oldfiles), "filereadable(fnamemodify(v:val, ':p'))"),
-    \ 'fnamemodify(v:val, ":~:.")')
-endfunction
-
-" }}}
-
-" if ctrl+f should be in fullscreen or not
-let g:c_f_fullscreen=1
-
-" Source option explanation
-" [line 1] use bash for input redirection & process substitution
-" [line 1] use awk to remove repeated entries [https://stackoverflow.com/a/11532197]
-" [line 2] current file + buffer list
-" [line 3] files in current directory
-" [line 4] old files
-command! FZFMixed call fzf#run(fzf#wrap('find-all', fzf#vim#with_preview({
-			\ 'source': 'bash -c '' awk \!x\[\$0]\+\+ '.
-			\ '<(tr "\r" "\n" <<<"'.join(s:buffer_list(), "\r").'") '.
-			\ '<('.$FZF_DEFAULT_COMMAND.') '.
-			\ '<(tr "\r" "\n" <<<"'. join(ctrlp#mrufiles#list(), "\r") .'") '.
-			\ '''',
-			\ 'down': '50%',
-			\ 'options': '--no-sort --multi --prompt "Choice> " --header-lines 1',
-			\}), g:c_f_fullscreen))
-" the 1 above means fullscreen
+" decrease delay to close fzf windows after pressing <Esc>
+augroup fzf_autocmds
+	autocmd!
+	autocmd Filetype fzf setlocal ttimeoutlen=10
+augroup END
 
 " search for regex (grep)
 nnoremap <c-g> :Ag<space>
 
-" c-f to find files
-nnoremap <silent> <c-f> :FZFMixed<CR>
+" c-f to find files, then c-f again to find buffers
+nnoremap <silent> <c-f> :FZFCycle<CR>
 
 " Find mappings
 nmap <silent> <leader>fm <plug>(fzf-maps-n)
+
 " Find files
 nnoremap <silent> <leader>ff :Files<CR>
-" Find git files
-nnoremap <silent> <leader>fF :GFiles<CR>
+
+" Find all files (change the ag command to not ignore .gitignore etc)
+function! s:find_all_files(...)
+	let backup=$FZF_DEFAULT_COMMAND
+	let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g "" -U'
+	call call('fzf#vim#files', a:000)
+	let $FZF_DEFAULT_COMMAND = backup
+endfunction
+command! -bang -nargs=? -complete=dir AllFiles call s:find_all_files(<q-args>, <bang>0)
+nnoremap <silent> <leader>fF :AllFiles<cr>
+
 " Find buffers
 nnoremap <silent> <leader>fb :Buffers<CR>
 " Find history (open bufferes and most recently used (v:oldfiles))

@@ -11,9 +11,6 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" vim configs (provides Ack functionality too)
 	Plug 'junegunn/fzf.vim'
 
-	" most recently used files
-	Plug 'ctrlpvim/ctrlp.vim'
-
 	" buffer manager
 	Plug 'jlanzarotta/bufexplorer'
 
