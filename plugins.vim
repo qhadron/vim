@@ -2,6 +2,19 @@
 call plug#begin($VIM_PREFIX . '/plugged')
 
 	""""""""""""""""""""""""""""""
+	" => Visual
+	""""""""""""""""""""""""""""""
+
+	" colours
+	Plug 'flazz/vim-colorschemes'	
+
+	" status line
+	Plug 'itchyny/lightline.vim'
+
+	" zen mode
+	Plug 'junegunn/goyo.vim'
+
+	""""""""""""""""""""""""""""""
 	" => Navigation
 	""""""""""""""""""""""""""""""
 
@@ -45,19 +58,6 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'svermeulen/vim-subversive'
 
 	" markdown support
-
-	""""""""""""""""""""""""""""""
-	" => Visual
-	""""""""""""""""""""""""""""""
-
-	" colours
-	Plug 'flazz/vim-colorschemes'	
-
-	" status line
-	Plug 'itchyny/lightline.vim'
-
-	" zen mode
-	Plug 'junegunn/goyo.vim'
 
 	""""""""""""""""""""""""""""""
 	" => syntax support

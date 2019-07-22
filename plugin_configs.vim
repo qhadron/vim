@@ -207,10 +207,14 @@ endfunction
 
 command! FZFCycle call <sid>fzf_next(0)
 
-" decrease delay to close fzf windows after pressing <Esc>
-augroup fzf_autocmds
+function! s:configure_fzf_window()
+	" decrease delay to close fzf windows after pressing <Esc>
+	setlocal ttimeoutlen=10
+endfunction
+
+augroup s:custom_fzf_configs
 	autocmd!
-	autocmd Filetype fzf setlocal ttimeoutlen=10
+	autocmd Filetype fzf call s:configure_fzf_window()
 augroup END
 
 " search for regex (grep)
