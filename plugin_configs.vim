@@ -189,8 +189,11 @@ let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g ""'
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 0
 
+" prefer to open in terminal mode in order to use terminal mode mappings
+let g:fzf_prefer_term = 1
+
 " set fzf layout (and open fzf in terminal window for the mappings)
-let g:fzf_layout = {'up': '30%'}
+let g:fzf_layout = {'down': '30%'}
 
 " fzf mapping to switch search type
 " https://github.com/junegunn/fzf.vim/issues/289#issuecomment-447560813

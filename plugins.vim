@@ -7,7 +7,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" fzf (fuzzy file searcher)
 	" binary
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all;git reset --hard; git apply '.$VIM_PREFIX.'/patches/0001-add-prefer-term-option-for-vim.patch' }
 	" vim configs (provides Ack functionality too)
 	Plug 'junegunn/fzf.vim'
 
