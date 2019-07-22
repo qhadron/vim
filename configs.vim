@@ -83,4 +83,18 @@ augroup my_au_group
 
 augroup END
 
+" functions to profile vim
+function! s:profile_start()
+	profile start ~/vim_profile.log
+	profile func *
+	profile file *
+endfunction
 
+function! s:profile_end()
+	profile pause
+	tabnew ~/vim_profile.log
+endfunction
+
+" commands to use the functions
+command ProfileStart call s:profile_start()
+command ProfileEnd call s:profile_end()
