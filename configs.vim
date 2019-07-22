@@ -46,6 +46,9 @@ set mouse=a
 inoremap jj <Esc>
 nnoremap JJJJ <Nop>
 
+" Get rid of Ex mode
+nnoremap Q <nop>
+
 " unnamed buffer
 set clipboard+=unnamed
 
