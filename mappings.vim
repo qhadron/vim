@@ -62,8 +62,10 @@ map <leader>e :e! $VIM_PREFIX/configs.vim<cr>
 " reload vimrc on (intentional) write
 autocmd BufWritePost configs.vim if expand('%') ==# $VIM_PREFIX . '/configs.vim' | source $VIM_PREFIX/configs.vim | endif
 
-" read vimrc
-map <leader>R :source $VIM_PREFIX/configs.vim<cr>
+" reload customized functions
+nnoremap <leader>r :source $VIM_PREFIX/configs.vim<cr>
+" reload entire vimrc
+nnoremap <leader>R :source $VIM_PREFIX/main.vim<cr>
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
