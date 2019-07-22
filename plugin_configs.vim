@@ -284,7 +284,7 @@ let g:goyo_linenr = 0
 " => vim-markdown
 """"""""""""""""""""""""""""""
 " disable folding for better performance
-let g:vim_markdown_folding_dlisabled = 1
+let g:vim_markdown_folding_disabled = 1
 " don't add indent levels on new list items
 let g:vim_markdown_new_list_item_indent = 0
 " enable strikethrough
