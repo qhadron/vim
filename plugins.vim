@@ -88,8 +88,40 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" snippets for the manager
 	Plug 'honza/vim-snippets', { 'on': [] }
 
-	" completion
-	Plug 'Valloric/YouCompleteMe', { 'on': ['YCM'] , 'do': './install.py --clang-completer' }
+	function s:check_ycm_deps()
+		" dict of executable: package
+		"   python3 to run the install script
+		"   cmake for the make files
+		"   python3-config for python headers ("python3-dev" package)
+		"   c++, cc for cxx, c compiler ("build-essential" package)
+		let deps = { 
+					\'python3': 'python3',
+					\'cmake': 'cmake',
+					\'python3-config': 'python3-dev',
+					\'c++': 'build-essential',
+					\'cc': 'build-essential', 
+					\ }
+		let missing = {}
+		for dep in keys(deps)
+			if !executable(dep)
+				let missing[deps[dep]]=1
+			endif
+		endfor
+		if len(missing) > 0
+			augroup s:ycm_warning
+				autocmd!
+				execute "autocmd VimEnter * echom 'Install ".join(keys(missing), ', ')." to enable YouCompleteMe.' | autocmd! s:ycm_warning"
+			augroup END
+			return 0
+		else
+			return 1
+		endif
+	endfunction
+
+	if s:check_ycm_deps()
+		" completion
+		Plug 'Valloric/YouCompleteMe', { 'on': ['YCM'] , 'do': 'python3 ./install.py --clang-completer' }
+	endif
 
 	" load snippets when it's needed
 	augroup load_snippets
