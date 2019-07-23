@@ -64,9 +64,6 @@ set shell=zsh
 " 1 line high command line
 set cmdheight=1
 
-" spell file
-set spellfile=~/.vim_runtime/spell/words.utf-8.add
-
 " auto commands for file types
 augroup my_au_group
 	" clear the group in case of reloading
