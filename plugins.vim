@@ -14,6 +14,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" zen mode
 	Plug 'junegunn/goyo.vim'
 
+	" colored parentheses
+	Plug 'luochen1990/rainbow'
+
 	""""""""""""""""""""""""""""""
 	" => Navigation
 	""""""""""""""""""""""""""""""

@@ -310,3 +310,10 @@ endfunction
 let g:peekaboo_window='call '.s:sid().'open_peekaboo_window()'
 let g:peekaboo_compact=0
 let g:peekaboo_prefix='<leader>'
+
+
+""""""""""""""""""""""""""""""
+" => rainbow
+""""""""""""""""""""""""""""""
+" provide rainbow brackets by default
+let g:rainbow_active = 1
