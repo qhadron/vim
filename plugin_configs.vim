@@ -2,6 +2,13 @@
 " => global stuff
 """"""""""""""""""""""""""""""
 let s:ag_command = 'ag --vimgrep --smart-case'
+
+" function to get the sid
+function! s:sid()
+	return maparg('<SID>', 'n')
+endfunction
+nnoremap <SID> <SID>
+
 """"""""""""""""""""""""""""""
 " => bufExplorer plugin
 """"""""""""""""""""""""""""""
@@ -280,7 +287,7 @@ let g:vim_markdown_toc_autofit = 1
 
 """"""""""""""""""""""""""""""
 " => Nerd tree
-""""""""""""""""""""""""""""""-
+""""""""""""""""""""""""""""""
 " open nerdtree if input is a directory
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | call feedkeys("A") | exe 'cd '.argv()[0] | endif
@@ -291,3 +298,15 @@ nnoremap <c-m-l> :NERDTreeToggle<cr>
 let NERDTreeNaturalSort = 1
 " close after opening file or bookmark
 let NERDTreeQuitOnOpen = 3
+
+
+""""""""""""""""""""""""""""""
+" => vim-peekaboo
+""""""""""""""""""""""""""""""
+let g:peekaboo_window_percentage=40
+function! s:open_peekaboo_window()
+	execute 'vertical botright '.string(round(winwidth(0)/100.0*g:peekaboo_window_percentage))."new"
+endfunction
+let g:peekaboo_window='call '.s:sid().'open_peekaboo_window()'
+let g:peekaboo_compact=0
+let g:peekaboo_prefix='<leader>'

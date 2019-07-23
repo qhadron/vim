@@ -57,7 +57,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" substitute/modify text with clipboard
 	Plug 'svermeulen/vim-subversive'
 
-	" markdown support
+	" pop-up window to show registers
+	Plug 'junegunn/vim-peekaboo'
 
 	""""""""""""""""""""""""""""""
 	" => syntax support
