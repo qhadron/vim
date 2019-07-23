@@ -119,8 +119,30 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	endfunction
 
 	if s:check_ycm_deps()
-		" completion
-		Plug 'Valloric/YouCompleteMe', { 'on': ['YCM'] , 'do': 'python3 ./install.py --clang-completer' }
+		" completion (don't use 'for':[...] here to load on insert
+		Plug 'Valloric/YouCompleteMe', { 
+					\ 'on': [] ,
+					\ 'do': 'python3 ./install.py --clang-completer' 
+					\}
+
+		" command to enable YCM (triggers vim-plug)
+		command! YCM call plug#load('YouCompleteMe')
+
+		" filetypes to load ycm for on insert (use mapping for performance)
+		let g:ycm_filetypes = {'js':1, 'cpp':1, 'c':1, 'python':1 }
+		
+		function s:check_load_ycm()
+			if get(g:ycm_filetypes, &filetype, 0)
+				call plug#load('YouCompleteMe')
+				autocmd! load_ycm
+			endif
+		endfunction
+
+		" load ycm when it's needed
+		augroup load_ycm
+		  autocmd!
+		  autocmd InsertEnter * call s:check_load_ycm()
+		augroup END
 	endif
 
 	" load snippets when it's needed
@@ -131,12 +153,6 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	augroup END
 
 
-	" load ycm when it's needed
-	augroup load_ycm
-	  autocmd!
-	  autocmd FileType js,c,cpp,python call plug#load('YouCompleteMe')
-						 \| autocmd! load_ycm
-	augroup END
 
 
 call plug#end()

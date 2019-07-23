@@ -137,9 +137,6 @@ set updatetime=100
 """"""""""""""""""""""""""""""
 " => YouCompleteMe
 """"""""""""""""""""""""""""""
-" command to enable YCM (triggers vim-plug)
-command! YCM call plug#load('YouCompleteMe')
-
 " YouCompleteMe configs
 if len(glob('~/.ycm.py'))
 	let g:ycm_global_ycm_extra_conf  = '~/.ycm.py'
