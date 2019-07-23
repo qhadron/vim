@@ -9,8 +9,14 @@ let mapleader = ","
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en' 
 set langmenu=en
-source $VIMRUNTIME/delmenu.vim
-source $VIMRUNTIME/menu.vim
+try
+	source $VIMRUNTIME/delmenu.vim
+catch
+endtry
+try
+	source $VIMRUNTIME/menu.vim
+catch
+endtry
 
 " Enable command-line tab completion
 set wildmenu
