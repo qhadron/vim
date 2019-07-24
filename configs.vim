@@ -61,6 +61,9 @@ set visualbell
 " set shell to zsh
 set shell=zsh
 
+" add command to open terminal
+nnoremap <silent> <c-t> :tabnew +terminal++curwin<cr>
+
 " 1 line high command line
 set cmdheight=1
 
