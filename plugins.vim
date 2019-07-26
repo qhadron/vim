@@ -63,6 +63,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" pop-up window to show registers
 	Plug 'junegunn/vim-peekaboo'
 
+	" alignment (used with markdown for formatting tables
+	Plug 'godlygeek/tabular'
+
 	""""""""""""""""""""""""""""""
 	" => syntax support
 	""""""""""""""""""""""""""""""
