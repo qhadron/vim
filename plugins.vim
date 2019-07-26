@@ -66,6 +66,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" alignment (used with markdown for formatting tables
 	Plug 'godlygeek/tabular'
 
+	" emoji support
+	Plug 'junegunn/vim-emoji'
+
 	""""""""""""""""""""""""""""""
 	" => syntax support
 	""""""""""""""""""""""""""""""

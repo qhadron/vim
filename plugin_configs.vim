@@ -317,3 +317,19 @@ let g:peekaboo_prefix='<leader>'
 """"""""""""""""""""""""""""""
 " provide rainbow brackets by default
 let g:rainbow_active = 1
+
+""""""""""""""""""""""""""""""
+" => vim-emoji
+""""""""""""""""""""""""""""""
+" enable emoji completion for :emote: syntax
+set completefunc=emoji#complete
+" replace :emote: with emojis for current line
+" use Emojify! for whole file
+" unrecognized emojis are not changed
+command! -range -bang Emojify
+			\ if <bang>0 |
+			\   silent! %s/\m:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g |
+			\ else |
+			\   silent! <line1>,<line2>s/\m:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g |
+			\ endif
+nnoremap <silent> <leader>E :Emojify<cr>
