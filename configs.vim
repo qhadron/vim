@@ -52,6 +52,9 @@ nnoremap Q <nop>
 " unnamed buffer
 set clipboard+=unnamed
 
+" quit all
+nnoremap <leader>Q :qa<cr>
+
 " Redraw
 map <F5> :redraw!<cr>
 
