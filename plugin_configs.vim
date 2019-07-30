@@ -227,9 +227,6 @@ nnoremap <c-g> :Ag<space>
 " c-f to find files, then c-f again to find buffers
 nnoremap <silent> <c-f> :FZFCycle<CR>
 
-" Find mappings
-nmap <silent> <leader>fm <plug>(fzf-maps-n)
-
 " Find files
 nnoremap <silent> <leader>ff :Files<CR>
 
@@ -257,6 +254,26 @@ nnoremap <silent> <leader>fl :BLines<CR>
 nnoremap <silent> <leader>fL :Lines<CR>
 " Find filetypes
 nnoremap <silent> <leader>ft :Filetypes<CR>
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+function! s:complete_word()
+	if len(&dictionary) 
+		fzf#vim#complete('cat '.&dictionary)
+	else
+		echom "specify a value for dict for word completion. (See :help dict)"
+		return ''	
+	endif
+endfunction
+
+inoremap <expr> <c-x><c-k> <sid>complete_word()
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 """"""""""""""""""""""""""""""
 " => goyo
