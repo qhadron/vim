@@ -158,16 +158,16 @@ let g:ycm_auto_trigger = 1
 " which filetypes to unblacklist for YCM
 let g:ycm_filetype_unblacklist = ['markdown', 'text']
 
-let s:ycm_text_mode_enabled=0
-function! s:ycm_text_mode(force_disable)
-	if !a:force_disable && !s:ycm_text_mode_enabled
-		echom "Enabling YCM text mode"
-		let s:ycm_text_mode_enabled=1
+let s:ycm_identifiers_disabled=0
+function! s:ycm_toggle_identifiers(force_disable)
+	if !a:force_disable && !s:ycm_identifiers_disabled
+		echom "Disabling YCM identifier completion..."
+		let s:ycm_identifiers_disabled=1
 		let s:old_ycm_min_num_of_chars_for_completion=g:ycm_min_num_of_chars_for_completion
 		let g:ycm_min_num_of_chars_for_completion=99
 	else
-		echom "Disabling YCM text mode"
-		let s:ycm_text_mode_enabled=0
+		echom "Restoring YCM identifier completion..."
+		let s:ycm_identifiers_disabled=0
 		try
 			let g:ycm_min_num_of_chars_for_completion=s:old_ycm_min_num_of_chars_for_completion
 		catch
@@ -210,10 +210,10 @@ function! s:addYcmMappings()
 		endif
 
 		" use YCMToggleTextMode! to force disable text mode
-		command -bang YCMToggleTextMode call s:ycm_text_mode(<bang>0)
+		command -bang YCMToggleIdentifiers call s:ycm_toggle_identifiers(<bang>0)
 
 		" add a mapping for that
-		nnoremap <silent> <leader>yt :YCMToggleTextMode<cr>
+		nnoremap <silent> <leader>yt :YCMToggleIdentifiers<cr>
 
 	endif
 endfunction	
