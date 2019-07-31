@@ -35,7 +35,6 @@ let g:EasyMotion_smartcase = 1
 let g:UltiSnipsExpandTrigger='<c-l>'
 let g:UltiSnipsJumpForwardTrigger='<c-j>'
 let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-let g:UltiSnipsListSnippets='<c-x>s'
 
 
 """"""""""""""""""""""""""""""
@@ -314,6 +313,29 @@ inoremap <expr> <c-x><c-k> <sid>complete_word()
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" use fzf to complete ultisnips snippets
+let g:snippet_key_value_separator='   |   '
+function! s:get_available_snippets(...)
+	let snips = UltiSnips#SnippetsInCurrentScope(1)
+	let lines=[]
+	for key in keys(snips)
+		let lines = add(lines, key . g:snippet_key_value_separator . snips[key])
+	endfor
+	return lines
+endfunction
+
+function! s:fzf_snippets_sink(lines)
+	return split(a:lines[0], g:snippet_key_value_separator)[0]
+endfunction
+
+inoremap <expr> <c-x>s fzf#vim#complete(
+			\ {
+			\  'source': function('<sid>get_available_snippets'),
+			\  'reducer': function('<sid>fzf_snippets_sink'),
+			\  'options': '--delimiter "'.g:snippet_key_value_separator.'" --nth 1',
+			\ }
+			\ )
 
 """"""""""""""""""""""""""""""
 " => goyo
