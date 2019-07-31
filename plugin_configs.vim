@@ -158,6 +158,27 @@ let g:ycm_auto_trigger = 1
 " which filetypes to unblacklist for YCM
 let g:ycm_filetype_unblacklist = ['markdown', 'text']
 
+let s:ycm_text_mode_enabled=0
+function! s:ycm_text_mode(force_disable)
+	if !a:force_disable && !s:ycm_text_mode_enabled
+		echom "Enabling YCM text mode"
+		let s:ycm_text_mode_enabled=1
+		let s:old_ycm_min_num_of_chars_for_completion=g:ycm_min_num_of_chars_for_completion
+		let g:ycm_min_num_of_chars_for_completion=99
+	else
+		echom "Disabling YCM text mode"
+		let s:ycm_text_mode_enabled=0
+		try
+			let g:ycm_min_num_of_chars_for_completion=s:old_ycm_min_num_of_chars_for_completion
+		catch
+		endtry
+	endif
+	try
+		silent YcmRestartServer
+	catch
+	endtry
+endfunction
+
 let s:ycm_keybinds_added = 0
 function! s:addYcmMappings() 
 	if ! s:ycm_keybinds_added
@@ -187,6 +208,13 @@ function! s:addYcmMappings()
 				endif
 			endfor
 		endif
+
+		" use YCMToggleTextMode! to force disable text mode
+		command -bang YCMToggleTextMode call s:ycm_text_mode(<bang>0)
+
+		" add a mapping for that
+		nnoremap <silent> <leader>yt :YCMToggleTextMode<cr>
+
 	endif
 endfunction	
 
