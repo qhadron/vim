@@ -32,9 +32,10 @@ let g:EasyMotion_smartcase = 1
 """"""""""""""""""""""""""""""
 " => UltiSnips
 """"""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger="<c-l>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger='<c-l>'
+let g:UltiSnipsJumpForwardTrigger='<c-j>'
+let g:UltiSnipsJumpBackwardTrigger='<c-k>'
+let g:UltiSnipsListSnippets='<c-x>s'
 
 
 """"""""""""""""""""""""""""""
@@ -154,6 +155,8 @@ let g:ycm_warning_symbol = '##'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_auto_trigger = 1
+" which filetypes to unblacklist for YCM
+let g:ycm_filetype_unblacklist = ['markdown', 'text']
 
 let s:ycm_keybinds_added = 0
 function! s:addYcmMappings() 
@@ -175,6 +178,15 @@ function! s:addYcmMappings()
 			echom 'YouCompleteMe loaded!'
 		endif
 		let s:ycm_keybinds_added = 1
+
+		" disable blacklist for some files
+		if exists('g:ycm_filetype_blacklist')
+			for key in g:ycm_filetype_unblacklist
+				if exists('g:ycm_filetype_blacklist.'.key)
+					call remove(g:ycm_filetype_blacklist, key)
+				endif
+			endfor
+		endif
 	endif
 endfunction	
 
