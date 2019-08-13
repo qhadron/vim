@@ -79,7 +79,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'vim-syntastic/syntastic'
 
 	" markdown support
-	Plug 'plasticboy/vim-markdown'
+	Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 
 	" mustache/handlebars support
 	Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }

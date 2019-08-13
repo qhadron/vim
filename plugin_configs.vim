@@ -386,7 +386,7 @@ let g:vim_markdown_toc_autofit = 1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | call feedkeys("A") | exe 'cd '.argv()[0] | endif
 " mapping to toggle nerdtree
-nnoremap <c-m-l> :NERDTreeToggle<cr>
+nnoremap <silent> <c-m-l> :NERDTreeToggle<cr>
 
 " natrual sort
 let NERDTreeNaturalSort = 1
