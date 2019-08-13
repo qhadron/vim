@@ -81,6 +81,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" markdown support
 	Plug 'plasticboy/vim-markdown'
 
+	" mustache/handlebars support
+	Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
+
 	""""""""""""""""""""""""""""""
 	" => Git
 	""""""""""""""""""""""""""""""
