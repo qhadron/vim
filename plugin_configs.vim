@@ -37,9 +37,9 @@ let g:UltiSnipsJumpBackwardTrigger='<c-j>'
 let g:UltiSnipsJumpForwardTrigger='<c-k>'
 
 
-""""""""""""""""""""""""""""""
-" => vim-yoink, vim-subversive
-""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""
+" => vim-yoink, vim-subversive, vim-cutlass
+"""""""""""""""""""""""""""""""""""""""""""
 " yoink stuff
 
 " swap after pasting
@@ -65,6 +65,21 @@ let g:yoinkSyncNumberedRegisters = 1
 nmap s <plug>(SubversiveSubstitute)
 nmap ss <plug>(SubversiveSubstituteLine)
 nmap S <plug>(SubversiveSubstituteToEndOfLine)
+
+" visual mode paste & swapping
+xmap s <plug>(SubversiveSubstitute)
+xmap p <plug>(SubversiveSubstitute)
+xmap P <plug>(SubversiveSubstitute)
+
+" cutlass makes default operations not yank
+" use x as "move" binding
+nnoremap x d
+xnoremap x d
+
+nnoremap xx dd
+nnoremap X D
+" yoink,cutlass compatibility
+let g:yoinkIncludeDeleteOperations = 1
 
 """"""""""""""""""""""""""""""
 " => lightline

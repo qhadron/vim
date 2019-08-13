@@ -59,6 +59,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'svermeulen/vim-yoink'
 	" substitute/modify text with clipboard
 	Plug 'svermeulen/vim-subversive'
+	" add motion for cutting text
+	Plug 'svermeulen/vim-cutlass'
 
 	" pop-up window to show registers
 	Plug 'junegunn/vim-peekaboo'
