@@ -60,6 +60,9 @@ let g:yoinkMaxItems = 20
 " also update named registers
 let g:yoinkSyncNumberedRegisters = 1
 
+" don't sync system clipboard because behaviour is strange
+let g:yoinkSyncSystemClipboardOnFocus = 0
+
 " subsitute (subversive) stuff
 " s for substitute
 nmap s <plug>(SubversiveSubstitute)
