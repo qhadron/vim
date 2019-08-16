@@ -73,11 +73,12 @@ xmap P <plug>(SubversiveSubstitute)
 
 " cutlass makes default operations not yank
 " use x as "move" binding
-nnoremap x d
-xnoremap x d
+nnoremap m d
+xnoremap m d
 
-nnoremap xx dd
-nnoremap X D
+nnoremap mm dd
+nnoremap M D
+
 " yoink,cutlass compatibility
 let g:yoinkIncludeDeleteOperations = 1
 
