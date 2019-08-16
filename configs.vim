@@ -78,6 +78,9 @@ augroup my_au_group
 	" Enable spellcheck for markdown files
 	autocmd Filetype markdown :setlocal spell
 
+	" set indentation options for yaml files
+	autocmd Filetype yaml :set expandtab ts=2 sw=2
+
 	" Set filetype for docker files
 	autocmd BufNewFile,BufRead Dockerfile.* :setfiletype dockerfile
 
