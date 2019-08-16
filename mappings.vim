@@ -21,6 +21,10 @@ map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove 
 map <leader>t<leader> :tabnext 
+noremap H :normal! gT<cr>
+noremap L :normal! gt<cr>
+inoremap <c-h> <esc>:normal! gT<cr>
+inoremap <c-l> <esc>:normal! gt<cr>
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
