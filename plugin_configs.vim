@@ -57,8 +57,8 @@ xmap y <plug>(YoinkYankPreserveCursorPosition)
 " yank history
 let g:yoinkMaxItems = 20
 
-" also update named registers
-let g:yoinkSyncNumberedRegisters = 1
+" don't update named registers (causes issue with first move)
+let g:yoinkSyncNumberedRegisters = 0
 
 " don't sync system clipboard because behaviour is strange
 let g:yoinkSyncSystemClipboardOnFocus = 0

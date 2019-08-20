@@ -55,12 +55,12 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" make <C-A>, <C-X> work with dates
 	Plug 'tpope/vim-speeddating'
 
-	" clipboard manager
-	Plug 'svermeulen/vim-yoink'
+	" blackhole redirection of delete operations by default
+	Plug 'svermeulen/vim-cutlass'
 	" substitute/modify text with clipboard
 	Plug 'svermeulen/vim-subversive'
-	" add motion for cutting text
-	Plug 'svermeulen/vim-cutlass'
+	" clipboard manager
+	Plug 'svermeulen/vim-yoink'
 
 	" pop-up window to show registers
 	Plug 'junegunn/vim-peekaboo'
@@ -166,8 +166,5 @@ call plug#begin($VIM_PREFIX . '/plugged')
 		autocmd InsertEnter * call plug#load('ultisnips', 'vim-snippets') 
 					\| autocmd! load_snippets
 	augroup END
-
-
-
 
 call plug#end()
