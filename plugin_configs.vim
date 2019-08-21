@@ -264,7 +264,7 @@ function! s:fzf_next(idx)
   let cmd='call '.commands[a:idx].'("", fzf#vim#with_preview('.string(g:fzf_layout).', "right:hidden", "?"), 0)'
   execute cmd
   let next = (a:idx + 1) % len(commands)
-  execute 'tnoremap <buffer> <silent> <c-f> <c-\><c-n>:q!<cr>:sleep 1m<cr>:silent call <sid>fzf_next('.next.')<cr>'
+  execute 'tnoremap <buffer> <silent> <c-f> <c-\><c-n>:q! \| sleep 1m \| silent call <sid>fzf_next('.next.')<cr>'
 endfunction
 
 command! FZFCycle call <sid>fzf_next(0)
