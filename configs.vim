@@ -46,9 +46,6 @@ nnoremap JJJJ <Nop>
 " Get rid of Ex mode
 nnoremap Q <nop>
 
-" unnamed buffer
-set clipboard+=unnamed
-
 " quit all
 nnoremap <leader>Q :qa<cr>
 
