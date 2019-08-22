@@ -6,9 +6,6 @@ set background=dark
 colorscheme peaksea
 let g:colors_name="peaksea"
 
-" change verticle split styling so it stands out from text
-hi VertSplit ctermbg=fg ctermfg=bg
-
 " Set relative line numbers with current line displayed instead of 0
 set rnu
 set number
