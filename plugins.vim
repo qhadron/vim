@@ -1,3 +1,6 @@
+" source YCM configs
+source $VIM_PREFIX/ycm.vim
+
 " start plugin list
 call plug#begin($VIM_PREFIX . '/plugged')
 
@@ -98,67 +101,13 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" => Programming
 	""""""""""""""""""""""""""""""
 
+	" call function to plug correct settings for YCM 
+	call g:PlugYcm()
+
 	" snippet manager
 	Plug 'SirVer/ultisnips', { 'on': [] }
 	" snippets for the manager
 	Plug 'honza/vim-snippets', { 'on': [] }
-
-	function s:check_ycm_deps()
-		" dict of executable: package
-		"   python3 to run the install script
-		"   cmake for the make files
-		"   python3-config for python headers ("python3-dev" package)
-		"   c++, cc for cxx, c compiler ("build-essential" package)
-		let deps = { 
-					\'python3': 'python3',
-					\'cmake': 'cmake',
-					\'python3-config': 'python3-dev',
-					\'c++': 'build-essential',
-					\'cc': 'build-essential', 
-					\ }
-		let missing = {}
-		for dep in keys(deps)
-			if !executable(dep)
-				let missing[deps[dep]]=1
-			endif
-		endfor
-		if len(missing) > 0
-			augroup s:ycm_warning
-				autocmd!
-				execute "autocmd VimEnter * echom 'Install ".join(keys(missing), ', ')." to enable YouCompleteMe.' | autocmd! s:ycm_warning"
-			augroup END
-			return 0
-		else
-			return 1
-		endif
-	endfunction
-
-	if s:check_ycm_deps()
-		" completion (don't use 'for':[...] here to load on insert
-		Plug 'Valloric/YouCompleteMe', { 
-					\ 'on': [] ,
-					\ 'do': 'python3 ./install.py --clang-completer' 
-					\}
-
-		" command to enable YCM (triggers vim-plug)
-		command! YCM call plug#load('YouCompleteMe')
-
-		" filetypes to load ycm for on insert (use mapping for performance)
-		let g:ycm_filetypes = {'js':1, 'cpp':1, 'c':1, 'python':1 }
-		
-		function s:check_load_ycm()
-			if get(g:ycm_filetypes, &filetype, 0)
-				call plug#load('YouCompleteMe')
-				autocmd! load_ycm
-			endif
-		endfunction
-
-		" load ycm when it's needed
-		augroup load_ycm
-		  autocmd!
-		  autocmd InsertEnter * call s:check_load_ycm()
-		augroup END
-	endif
 
 	" load snippets when it's needed
 	augroup load_snippets
