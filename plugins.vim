@@ -55,12 +55,12 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" make <C-A>, <C-X> work with dates
 	Plug 'tpope/vim-speeddating'
 
-	" blackhole redirection of delete operations by default
-	Plug 'svermeulen/vim-cutlass'
-	" substitute/modify text with clipboard
-	Plug 'svermeulen/vim-subversive'
 	" clipboard manager
 	Plug 'svermeulen/vim-yoink'
+	" substitute/modify text with clipboard
+	Plug 'svermeulen/vim-subversive'
+	" blackhole redirection of delete operations by default
+	Plug 'svermeulen/vim-cutlass'
 
 	" pop-up window to show registers
 	Plug 'junegunn/vim-peekaboo'
