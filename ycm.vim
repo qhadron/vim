@@ -75,7 +75,7 @@ function g:PlugYcm()
 		" completion (don't use 'for':[...] here to load on insert)
 		Plug 'Valloric/YouCompleteMe', { 
 					\ 'on': [] ,
-					\ 'do': 'python3 ./install.py '.join(flags)
+					\ 'do': 'set -x; python3 ./install.py '.join(flags)
 					\}
 		
 		" command to enable YCM (triggers vim-plug)
