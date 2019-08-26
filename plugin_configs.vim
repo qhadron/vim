@@ -260,7 +260,7 @@ let g:fzf_layout = {'down': '30%'}
 " fzf mapping to switch search type
 " https://github.com/junegunn/fzf.vim/issues/289#issuecomment-447560813
 function! s:fzf_next(idx)
-  let commands = ['fzf#vim#buffers', 'fzf#vim#files', '<sid>find_all_files']
+  let commands = ['fzf#vim#files', 'fzf#vim#buffers', '<sid>find_all_files']
   let cmd='call '.commands[a:idx].'("", fzf#vim#with_preview('.string(g:fzf_layout).', "right:hidden", "?"), 0)'
   execute cmd
   let next = (a:idx + 1) % len(commands)
