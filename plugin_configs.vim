@@ -291,7 +291,8 @@ nnoremap <silent> <leader>ff :Files<CR>
 " Find all files (change the ag command to not ignore .gitignore etc)
 function! s:find_all_files(...)
 	let backup=$FZF_DEFAULT_COMMAND
-	let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g "" -U'
+	" search everything (-u) but ignore .git directory
+	let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g "" -u --ignore .git'
 	call call('fzf#vim#files', a:000)
 	let $FZF_DEFAULT_COMMAND = backup
 endfunction
