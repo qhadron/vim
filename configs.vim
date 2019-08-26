@@ -10,6 +10,9 @@ let g:colors_name="peaksea"
 set rnu
 set number
 
+" allow wrapped lines to be displayed in the number column
+set cpoptions+=n
+
 " Folding Stuffs
 set foldmethod=syntax
 " Don't enable folding by default
