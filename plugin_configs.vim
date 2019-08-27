@@ -257,17 +257,65 @@ let g:fzf_prefer_term = 1
 " set fzf layout (and open fzf in terminal window for the mappings)
 let g:fzf_layout = {'down': '30%'}
 
+" fzf modes commands
+let s:fzf_modes_commands = ['fzf#vim#buffers', 'fzf#vim#files', '<sid>find_all_files']
+
+" fzf mode index of commands array
+let s:fzf_mode_index=0
+
+let s:has_timers=has('timers')
+
 " fzf mapping to switch search type
 " https://github.com/junegunn/fzf.vim/issues/289#issuecomment-447560813
 function! s:fzf_next(idx)
-  let commands = ['fzf#vim#files', 'fzf#vim#buffers', '<sid>find_all_files']
-  let cmd='call '.commands[a:idx].'("", fzf#vim#with_preview('.string(g:fzf_layout).', "right:hidden", "?"), 0)'
-  execute cmd
-  let next = (a:idx + 1) % len(commands)
-  execute 'tnoremap <buffer> <silent> <c-f> <c-\><c-n>:q! \| sleep 1m \| silent call <sid>fzf_next('.next.')<cr>'
+	let idx=a:idx
+	let g:fzf_prompt_len=0
+	" start fzf
+	execute 'call '.s:fzf_modes_commands[idx].'("", fzf#vim#with_preview('.string(g:fzf_layout).', "right:hidden", "?"), 0)'
+	" check fzf prompt length
+	if s:has_timers
+		call timer_start(10, function('s:fzf_get_prompt'), {'repeat': -1})
+	else
+		sleep 100m
+		call s:fzf_get_prompt(0)
+	endif
+	execute 'tnoremap <buffer> <silent> <c-f> <c-\><c-n>:silent call <sid>fzf_switch_mode('.idx.')<cr>'
 endfunction
 
-command! FZFCycle call <sid>fzf_next(0)
+" 1. get the user input - fzf's prompt
+" 2. close the fzf window
+" 3. open next fzf mode
+function! s:fzf_switch_mode(idx)
+	" get user entered text before exiting
+	let col=term_getcursor('')[1] - 1 " -1 because col is 1 based
+	let s:fzf_user_text=strcharpart(term_getline("","."), s:fzf_prompt_len, col-s:fzf_prompt_len)
+
+	close!
+	" needed for focus reasons
+	sleep 1m
+
+	" remember the current mode
+	let s:fzf_mode_index = (a:idx + 1) % len(s:fzf_modes_commands)
+	call s:fzf_next(s:fzf_mode_index)
+endfunction
+
+" 1. check if fzf started (prompt len > 0)
+" 2. get the prompt length
+" 3. insert any previous input
+function! s:fzf_get_prompt(timerid)
+	let col=term_getcursor('')[1]-1
+	let s:fzf_prompt_len=strchars(strcharpart(term_getline("","."),0,col))
+	if s:fzf_prompt_len
+		if s:has_timers
+			call timer_stop(a:timerid)
+		endif
+		if exists('s:fzf_user_text')
+			call feedkeys(s:fzf_user_text, "n")
+		endif
+	endif
+endfunction
+
+command! FZFCycle let s:fzf_user_text="" | call <sid>fzf_next(s:fzf_mode_index)
 
 function! s:configure_fzf_window()
 	" decrease delay to close fzf windows after pressing <Esc>
