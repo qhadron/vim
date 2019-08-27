@@ -322,9 +322,9 @@ omap <leader><tab> <plug>(fzf-maps-o)
 " Insert mode completion
 function! s:complete_word()
 	if len(&dictionary) 
-		fzf#vim#complete('cat '.&dictionary)
+		fzf#vim#complete('cat '.join(&dictionary))
 	else
-		echom "specify a value for dict for word completion. (See :help dict)"
+		echom "specify a value for 'dict' for word completion. (See :help 'dict')"
 		return ''	
 	endif
 endfunction
