@@ -1,5 +1,5 @@
 " source YCM configs
-source $VIM_PREFIX/ycm.vim
+source $VIM_PREFIX/extras/ycm.vim
 
 " start plugin list
 call plug#begin($VIM_PREFIX . '/plugged')
