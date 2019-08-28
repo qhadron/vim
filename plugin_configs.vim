@@ -257,9 +257,6 @@ let g:fzf_prefer_term = 1
 " set fzf layout (and open fzf in terminal window for the mappings)
 let g:fzf_layout = {'down': '30%'}
 
-" remember fzf mode or not when cycling
-let g:fzf_cycle_remember_mode=0
-
 function! s:configure_fzf_window()
 	" decrease delay to close fzf windows after pressing <Esc>
 	setlocal ttimeoutlen=10
@@ -272,9 +269,6 @@ augroup END
 
 " search for regex (grep)
 nnoremap <c-g> :Ag<space>
-
-" c-f to find files, then c-f again to find buffers
-nnoremap <silent> <c-f> :FZFCycle<CR>
 
 " Find files
 nnoremap <silent> <leader>ff :Files<CR>
@@ -289,6 +283,18 @@ function! s:find_all_files(...)
 endfunction
 command! -bang -nargs=? -complete=dir AllFiles call s:find_all_files(<q-args>, <bang>0)
 nnoremap <silent> <leader>fF :AllFiles<cr>
+
+" source fzf cycle
+source $VIM_PREFIX/extras/fzf_cycle.vim
+
+" remember fzf mode or not when cycling
+let g:fzf_cycle_remember_mode = 0
+
+" override fzf cycle commands
+let g:fzf_cycle_commands += [function('s:find_all_files')]
+
+" bind fzf cycle
+nnoremap <silent> <c-f> :FZFCycle<CR>
 
 " Find buffers
 nnoremap <silent> <leader>fb :Buffers<CR>

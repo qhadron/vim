@@ -1,6 +1,11 @@
+" remember fzf mode or not when cycling
+let g:fzf_cycle_remember_mode=1
 
-" fzf modes commands
-let s:fzf_cycle_commands = ['fzf#vim#buffers', 'fzf#vim#files', '<sid>find_all_files']
+" default fzf cycle function names or function refs
+let g:fzf_cycle_commands = ['fzf#vim#buffers', 'fzf#vim#files']
+" add more commands like this:
+" let g:fzf_cycle_commands += [function('s:find_all_files')]
+
 
 " fzf mode index of commands array
 let s:fzf_cycle_index=0
@@ -12,8 +17,11 @@ let s:has_timers=has('timers')
 function! s:fzf_cycle(idx)
 	let idx=a:idx
 	let s:fzf_cycle_prompt_len=0
+	let command = type(g:fzf_cycle_commands[idx]) == type("") ?
+				\ g:fzf_cycle_commands[idx] :
+				\ string(g:fzf_cycle_commands[idx])
 	" start fzf
-	execute 'call '.s:fzf_cycle_commands[idx].'("", fzf#vim#with_preview('.string(g:fzf_layout).', "right:hidden", "?"), 0)'
+	execute 'call '.command.'("", fzf#vim#with_preview('.string(g:fzf_layout).', "right:hidden", "?"), 0)'
 	" check fzf prompt length
 	if s:has_timers
 		call timer_start(10, function('s:fzf_get_prompt'), {'repeat': -1})
@@ -52,8 +60,8 @@ function! s:fzf_cycle_next_mode(idx)
 	" needed for focus reasons
 	sleep 1m
 
-	" remember the current mode
-	let s:fzf_cycle_index = (a:idx + 1) % len(s:fzf_cycle_commands)
+	" remember the current index
+	let s:fzf_cycle_index = (a:idx + 1) % len(g:fzf_cycle_commands)
 	call s:fzf_cycle(s:fzf_cycle_index)
 endfunction
 
