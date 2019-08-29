@@ -429,3 +429,35 @@ command! -range -bang Emojify
 			\   silent! <line1>,<line2>s/\m:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g |
 			\ endif
 nnoremap <silent> <leader>E :Emojify<cr>
+
+""""""""""""""""""""""""""""""
+" => vim-better-whitespace
+""""""""""""""""""""""""""""""
+" set the color for whitespace
+let g:better_whitespace_ctermcolor='darkgrey'
+" enable highlighting by default
+let g:better_whitespace_enabled=1
+
+" change strip mapping
+let g:better_whitespace_operator='<leader>S'
+" strip changed lines file
+nnoremap <silent> <leader>W :StripWhitespaceOnChangedLines<cr>
+" navigate between bad whitespace
+nnoremap ]w :NextTrailingWhitespace<CR>
+nnoremap [w :PrevTrailingWhitespace<CR>
+
+" enable autostrip on save
+let g:strip_whitespace_on_save=1
+" for modified lines only
+let g:strip_only_modified_lines=1
+" but don't confirm (since it's only modified lines)
+let g:strip_whitespace_confirm=0
+
+" strip whitespace at eof?
+let g:strip_whitelines_at_eof=1
+
+" disable whitespace checking for term normal mode
+augroup disable_whitespace
+	autocmd!
+	autocmd TerminalOpen * DisableWhitespace
+augroup END

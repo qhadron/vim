@@ -78,6 +78,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" emoji support
 	Plug 'junegunn/vim-emoji'
 
+	" highlight extra whitespaces
+	Plug 'ntpeters/vim-better-whitespace'
+
 	""""""""""""""""""""""""""""""
 	" => syntax support
 	""""""""""""""""""""""""""""""
