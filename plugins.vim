@@ -3,6 +3,10 @@ source $VIM_PREFIX/extras/ycm.vim
 
 " start plugin list
 call plug#begin($VIM_PREFIX . '/plugged')
+	""""""""""""""""""""""""""""""
+	" => Vim Plug (add help docs)
+	""""""""""""""""""""""""""""""
+	Plug 'junegunn/vim-plug'
 
 	""""""""""""""""""""""""""""""
 	" => Visual
