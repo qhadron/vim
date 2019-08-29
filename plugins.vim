@@ -13,7 +13,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
 
 	" colours
-	Plug 'flazz/vim-colorschemes'	
+	Plug 'flazz/vim-colorschemes'
 
 	" status line
 	Plug 'itchyny/lightline.vim'
@@ -55,7 +55,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" pairs of actions (insert blank line, switch lines, etc)
 	Plug 'tpope/vim-unimpaired'
-			
+
 	" repeat plugin commands (vim-surround)
 	Plug 'tpope/vim-repeat'
 
@@ -72,7 +72,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" pop-up window to show registers
 	Plug 'junegunn/vim-peekaboo'
 
-	" alignment (used with markdown for formatting tables
+	" alignment (used with markdown for formatting tables)
 	Plug 'godlygeek/tabular'
 
 	" emoji support
@@ -108,7 +108,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" => Programming
 	""""""""""""""""""""""""""""""
 
-	" call function to plug correct settings for YCM 
+	" call function to plug correct settings for YCM
 	call g:PlugYcm()
 
 	" snippet manager
@@ -119,7 +119,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" load snippets when it's needed
 	augroup load_snippets
 		autocmd!
-		autocmd InsertEnter * call plug#load('ultisnips', 'vim-snippets') 
+		autocmd InsertEnter * call plug#load('ultisnips', 'vim-snippets')
 					\| autocmd! load_snippets
 	augroup END
 

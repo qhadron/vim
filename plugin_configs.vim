@@ -198,7 +198,7 @@ function! s:ycm_toggle_identifiers(force_disable)
 endfunction
 
 let s:ycm_keybinds_added = 0
-function! s:addYcmMappings() 
+function! s:addYcmMappings()
 	if ! s:ycm_keybinds_added
 		nnoremap <c-c>D :YcmDiags<CR>
 		nnoremap <c-F5> :YcmForceCompileAndDiagnostics<CR>
@@ -210,7 +210,7 @@ function! s:addYcmMappings()
 		nnoremap <c-c>f :YcmCompleter FixIt<CR>
 		nnoremap <c-c><c-f> :YcmCompleter Format<CR>
 		nnoremap <c-c>o :YcmCompleter OrganizeImports<CR>
-		nnoremap <F2> :YcmCompleter RefactorRename 
+		nnoremap <F2> :YcmCompleter RefactorRename
 		let g:ycm_key_detailed_diagnostics = '<c-c><c-d>'
 		let g:ycm_key_invoke_completion = '<C-Space>'
 		if v:vim_did_enter
@@ -234,7 +234,7 @@ function! s:addYcmMappings()
 		nnoremap <silent> <leader>yt :YCMToggleIdentifiers<cr>
 
 	endif
-endfunction	
+endfunction
 
 " YouCompleteMe mappings
 augroup s:YCM_Mappings
@@ -318,11 +318,11 @@ omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
 function! s:complete_word()
-	if len(&dictionary) 
+	if len(&dictionary)
 		fzf#vim#complete('cat '.join(&dictionary))
 	else
 		echom "specify a value for 'dict' for word completion. (See :help 'dict')"
-		return ''	
+		return ''
 	endif
 endfunction
 
@@ -361,7 +361,7 @@ nmap <leader>z :Goyo<CR>
 let g:goyo_width = '80'
 let g:goyo_height = '95%'
 " hide line numbers
-let g:goyo_linenr = 0 
+let g:goyo_linenr = 0
 
 """"""""""""""""""""""""""""""
 " => vim-markdown
