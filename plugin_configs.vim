@@ -461,3 +461,9 @@ augroup disable_whitespace
 	autocmd!
 	autocmd TerminalOpen * DisableWhitespace
 augroup END
+
+""""""""""""""""""""""""""""""
+" => tcomment
+""""""""""""""""""""""""""""""
+" disable leader key mappings
+let g:tcomment_mapleader2=''

@@ -108,6 +108,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" => Programming
 	""""""""""""""""""""""""""""""
 
+	" comment/uncomment with proper escaping
+	Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
+
 	" call function to plug correct settings for YCM
 	call g:PlugYcm()
 
