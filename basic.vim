@@ -190,3 +190,7 @@ endtry
 " shell (sh) syntax folding
 let g:sh_fold_enabled=5 " &1 is functions, &2 is heredoc, &4 is ifdofor
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => add command to diff the edited buffer with filesystem version
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+source $VIM_PREFIX/extras/diff_orig.vim
