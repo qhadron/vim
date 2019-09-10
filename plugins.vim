@@ -82,7 +82,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'ntpeters/vim-better-whitespace'
 
 	""""""""""""""""""""""""""""""
-	" => syntax support
+	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
 
 	" syntax checking
@@ -93,6 +93,13 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" mustache/handlebars support
 	Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
+
+	" LaTeX support
+	if executable('latexmk')
+		Plug 'lervag/vimtex'
+	else
+		autocmd Filetype tex,plaintex ++once echom 'Install latexmk for tex support!'
+	endif
 
 	""""""""""""""""""""""""""""""
 	" => Git

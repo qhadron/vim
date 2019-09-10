@@ -12,9 +12,6 @@ map <C-l> <C-W>l
 map <leader>bd :Bclose<cr>
 map <leader>bD :Bclose!<cr>
 
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
-
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>

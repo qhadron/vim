@@ -467,3 +467,12 @@ augroup END
 """"""""""""""""""""""""""""""
 " disable leader key mappings
 let g:tcomment_mapleader2=''
+
+
+""""""""""""""""""""""""""""""
+" => vimtex
+""""""""""""""""""""""""""""""
+" set the latex flavour (avoid detecting .tex as plaintex ft)
+let g:tex_flavor = 'latex'
+" set the compiler to latexmk
+let g:vimtex_compiler_method = 'latexmk'
