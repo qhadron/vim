@@ -472,7 +472,32 @@ let g:tcomment_mapleader2=''
 """"""""""""""""""""""""""""""
 " => vimtex
 """"""""""""""""""""""""""""""
-" set the latex flavour (avoid detecting .tex as plaintex ft)
+" set the vim latex flavour (avoid detecting .tex as plaintex ft)
 let g:tex_flavor = 'latex'
+
+" close quickfix after keystrokes
+let g:vimtex_quickfix_autoclose_after_keystrokes=1
+
 " set the compiler to latexmk
 let g:vimtex_compiler_method = 'latexmk'
+
+let g:vimtex_compiler_latexmk = {
+	\ 'build_dir': './.tex.build',
+	\ 'options' : [
+	\   '-pdf',
+	\   '-verbose',
+	\   '-file-line-error',
+	\   '-synctex=1',
+	\   '-interaction=nonstopmode',
+	\ ],
+	\}
+
+augroup vimtex_customization
+	autocmd!
+	autocmd User VimtexEventInitPost call s:on_vimtex_load()
+augroup END
+
+function s:on_vimtex_load()
+	" add fzf integration
+	nnoremap <localleader>lf :call vimtex#fzf#run()<cr>
+endfunction
