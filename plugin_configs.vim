@@ -481,8 +481,10 @@ let g:vimtex_quickfix_autoclose_after_keystrokes=1
 " set the compiler to latexmk
 let g:vimtex_compiler_method = 'latexmk'
 
+let g:vimtex_compiler_build_dir = '.tex.build'
+
 let g:vimtex_compiler_latexmk = {
-	\ 'build_dir': './.tex.build',
+	\ 'build_dir': g:vimtex_compiler_build_dir,
 	\ 'options' : [
 	\   '-pdf',
 	\   '-verbose',
@@ -495,9 +497,30 @@ let g:vimtex_compiler_latexmk = {
 augroup vimtex_customization
 	autocmd!
 	autocmd User VimtexEventInitPost call s:on_vimtex_load()
+	autocmd User VimtexCompileStarted call s:vimtex_build_folder()
 augroup END
 
 function s:on_vimtex_load()
 	" add fzf integration
 	nnoremap <localleader>lf :call vimtex#fzf#run()<cr>
+	" make vimtex build folder
+	call s:vimtex_build_folder()
+endfunction
+
+function s:vimtex_build_folder()
+	let old_path=getcwd()
+	execute 'cd '.expand('%:h:p')
+	" if build folder is not a directory delete it
+	if !isdirectory(g:vimtex_compiler_build_dir)
+		call delete(g:vimtex_compiler_build_dir)
+	endif
+	" make the build folder if it doesn't exist
+	if empty(glob(g:vimtex_compiler_build_dir))
+		call mkdir(g:vimtex_compiler_build_dir,"p")
+		" hide the folder if on windows-like systems
+		if executable('attrib.exe')
+			silent call system(join(['attrib.exe', '+h', '/s', '/d', g:vimtex_compiler_build_dir],' '))
+		endif
+	endif
+	execute 'cd '.old_path
 endfunction
