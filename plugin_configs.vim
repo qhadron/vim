@@ -441,7 +441,7 @@ let g:better_whitespace_enabled=1
 " change strip mapping
 let g:better_whitespace_operator='<leader>S'
 " strip changed lines file
-nnoremap <silent> <leader>W :StripWhitespaceOnChangedLines<cr>
+nnoremap <silent> <leader>W :StripWhitespace<cr>
 " navigate between bad whitespace
 nnoremap ]w :NextTrailingWhitespace<CR>
 nnoremap [w :PrevTrailingWhitespace<CR>
