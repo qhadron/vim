@@ -7,7 +7,7 @@ set history=10000
 let mapleader = ","
 
 " Avoid garbled characters in Chinese language windows OS
-let $LANG='en' 
+let $LANG='en'
 set langmenu=en
 try
 	source $VIMRUNTIME/delmenu.vim
@@ -32,23 +32,23 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
 set hlsearch
 
 " Makes search act like search in modern browsers
-set incsearch 
+set incsearch
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 " How many tenths of a second to blink when matching brackets
 set mat=2
 
@@ -61,7 +61,7 @@ set scrolloff=7
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
-syntax enable 
+syntax enable
 
 set background=dark
 
@@ -77,9 +77,9 @@ set nobackup
 set nowb
 set noswapfile
 
-set autoindent 
-set smartindent 
-set wrap 
+set autoindent
+set smartindent
+set wrap
 
 
 """"""""""""""""""""""""""""""
@@ -90,7 +90,7 @@ set wrap
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-" Specify the behavior when switching between buffers 
+" Specify the behavior when switching between buffers
 try
   set switchbuf=useopen,usetab,newtab
   set stal=2
@@ -123,7 +123,7 @@ endfunction
 
 function! CmdLine(str)
     call feedkeys(":" . a:str)
-endfunction 
+endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
@@ -141,10 +141,10 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-		
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Turn persistent undo on 
+" => Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set undodir=$VIM_PREFIX/temp_dirs/undodir
@@ -166,7 +166,7 @@ hi SpellBad gui=undercurl guisp=Red term=undercurl cterm=undercurl
 
 " Use English for spellchecking, but don't spellcheck by default (speed)
 if version >= 700
-   set spl=en spell 
+   set spl=en spell
    set nospell
 endif
 
