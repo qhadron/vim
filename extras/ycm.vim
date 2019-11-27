@@ -4,12 +4,12 @@ function s:check_ycm_deps()
 	"   cmake for the make files
 	"   python3-config for python headers ("python3-dev" package)
 	"   c++, cc for cxx, c compiler ("build-essential" package)
-	let deps = { 
+	let deps = {
 				\'python3': 'python3',
 				\'cmake': 'cmake',
 				\'python3-config': 'python3-dev',
 				\'c++': 'build-essential',
-				\'cc': 'build-essential', 
+				\'cc': 'build-essential',
 				\ }
 	let missing = {}
 	for dep in keys(deps)
@@ -18,17 +18,13 @@ function s:check_ycm_deps()
 		endif
 	endfor
 	if len(missing) > 0
-		augroup s:ycm_warning
-			autocmd!
-			execute "autocmd VimEnter * echom 'Install ".join(keys(missing), ', ')." to enable YouCompleteMe.' | autocmd! s:ycm_warning"
-		augroup END
 		return 0
 	else
 		return 1
 	endif
 endfunction
 
-" check dependencies and add them as flags	
+" check dependencies and add them as flags
 function s:get_ycm_flags()
 	" filetypes to load ycm for on insert (use mapping for performance)
 	let g:ycm_filetypes = {'cpp':1, 'c':1, 'python':1 }
@@ -73,11 +69,11 @@ function g:PlugYcm()
 		let flags=s:get_ycm_flags()
 
 		" completion (don't use 'for':[...] here to load on insert)
-		Plug 'Valloric/YouCompleteMe', { 
+		Plug 'Valloric/YouCompleteMe', {
 					\ 'on': [] ,
 					\ 'do': 'set -x; python3 ./install.py '.join(flags)
 					\}
-		
+
 		" command to enable YCM (triggers vim-plug)
 		command! YCM call plug#load('YouCompleteMe')
 
@@ -87,5 +83,10 @@ function g:PlugYcm()
 			autocmd InsertEnter * call s:check_load_ycm()
 		augroup END
 
+	else
+		augroup s:ycm_warning
+			autocmd!
+			execute "autocmd VimEnter * echom 'Install ".join(keys(missing), ', ')." to enable YouCompleteMe.' | autocmd! s:ycm_warning"
+		augroup END
 	endif
 endfunction
