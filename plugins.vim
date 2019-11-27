@@ -98,7 +98,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	if executable('latexmk')
 		Plug 'lervag/vimtex'
 	else
-		autocmd Filetype tex,plaintex ++once echom 'Install latexmk texlive texlive-latex-extra for tex support!'
+		autocmd Filetype tex,plaintex ++once echom 'Install latexmk texlive texlive-recommend texlive-latex-extra texlive-xetex for tex support!'
 	endif
 
 	""""""""""""""""""""""""""""""
