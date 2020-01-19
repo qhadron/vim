@@ -84,6 +84,15 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" highlight extra whitespaces
 	Plug 'ntpeters/vim-better-whitespace'
 
+	" add more text objects (https://github.com/kana/vim-textobj-user/wiki)
+	Plug 'kana/vim-textobj-user'
+	" text object: indents
+	Plug 'kana/vim-textobj-indent'
+	" text object: current line
+	Plug 'kana/vim-textobj-line'
+	" text object: comments
+	Plug 'glts/vim-textobj-comment'
+
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
