@@ -40,6 +40,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" better motions (f,t)
 	Plug 'easymotion/vim-easymotion'
 
+	" better slash searching
+	Plug 'junegunn/vim-slash'
+
 	" NERD tree will be loaded on the first invocation of NERDTreeToggle command
 	Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
 

@@ -524,3 +524,12 @@ function s:vimtex_build_folder()
 	endif
 	execute 'cd '.old_path
 endfunction
+
+""""""""""""""""""""""""""""""
+" => vim-slash
+""""""""""""""""""""""""""""""
+" center on screen (zz) and flash search result
+if has('timers')
+  " Blink 2 times with 50ms interval
+  noremap <expr> <plug>(slash-after) 'zz'.slash#blink(3, 50)
+endif
