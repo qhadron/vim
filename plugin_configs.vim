@@ -149,7 +149,13 @@ let g:syntastic_check_on_wq = 0
 " disable by default
 let g:gitgutter_enabled=0
 " add binding to toggle for the buffer
-nnoremap <silent> <leader>g :GitGutterToggle<cr>
+nnoremap <silent> <leader>gg :GitGutterToggle<cr>
+" add binding to stage a hunk
+nmap <silent> <leader>ga <Plug>(GitGutterStageHunk)
+" add binding to undo a hunk
+nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)
+" add binding to preview a hunk
+nmap <silent> <leader>gp <Plug>(GitGutterPreviewHunk)
 " enable highlighting by default
 let g:gitgutter_highlight_lines = 1
 " use ag instead of grep
