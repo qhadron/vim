@@ -78,6 +78,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" alignment (used with markdown for formatting tables)
 	Plug 'godlygeek/tabular'
 
+	" mapping-based alignment
+	Plug 'junegunn/vim-easy-align'
+
 	" emoji support
 	Plug 'junegunn/vim-emoji'
 
