@@ -37,7 +37,7 @@ vim +PlugInstall +qall
 # install dependencies
 #   silver searcher
 if [[ ! "$(which ag)" ]]; then
-	read -p "Installing silver searcher automatically? [y]/n"
+	read -p "Installing silver searcher automatically? y/[n]"
 	if [[ "$REPLY" =~ y ]]; then
 		( set -x; sudo apt-get -y install silversearcher-ag) && installed_ag=true
 	fi
@@ -49,7 +49,7 @@ fi
 #  latex
 if [[ ! "$(which latexmk)" ]]; then
 	pkgs="latexmk texlive texlive-recommend texlive-latex-extra texlive-xetex"
-	read -p "Installing latex tools automatically? [y]/n"
+	read -p "Installing latex tools automatically? y/[n]"
 	if [[ "$REPLY" =~ y ]]; then
 		( set -x; sudo apt-get -y install $pkgs) && installed_tex=true
 	fi
