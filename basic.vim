@@ -178,6 +178,11 @@ autocmd FocusGained,BufEnter * :checktime
 try
 	" enable mouse stuff
 	set mouse=a
+	if has("mouse_sgr")
+		set ttymouse=sgr
+	else
+		set ttymouse=xterm2
+	end
 	" disable autoselect for mouse (speed improvement)
 	set clipboard-=autoselect
 catch
@@ -201,3 +206,23 @@ source $VIM_PREFIX/extras/diff_orig.vim
 """"""""""""""""""""""""""""""
 let &t_TI = ""
 let &t_TE = ""
+
+""""""""""""""""""""""""""""""
+" => Mode-dependent cursor
+" use block in normal mode and line in insert mode
+" https://github.com/mintty/mintty/wiki/Tips#mode-dependent-cursor-in-vim
+""""""""""""""""""""""""""""""
+let &t_ti.="\e[1 q"
+let &t_SI.="\e[5 q"
+let &t_EI.="\e[1 q"
+let &t_te.="\e[0 q"
+
+
+""""""""""""""""""""""""""""""
+" => Avoid escape timeout issues
+" https://github.com/mintty/mintty/wiki/Tips#avoiding-escape-timeout-issues-in-vim
+""""""""""""""""""""""""""""""
+let &t_ti.="\e[?7727h"
+let &t_te.="\e[?7727l"
+noremap <Esc>O[ <Esc>
+noremap! <Esc>O[ <C-c>
