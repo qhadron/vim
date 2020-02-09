@@ -116,6 +116,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 		autocmd Filetype tex,plaintex ++once echom 'Install latexmk texlive texlive-recommend texlive-latex-extra texlive-xetex for tex support!'
 	endif
 
+	" python auto formatting
+	Plug 'tell-k/vim-autopep8', { 'for': 'python' }
+
 	""""""""""""""""""""""""""""""
 	" => Git
 	""""""""""""""""""""""""""""""
