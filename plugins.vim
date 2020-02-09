@@ -118,6 +118,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" python auto formatting
 	Plug 'tell-k/vim-autopep8', { 'for': 'python' }
+	" Improved python highlighting
+	Plug 'vim-python/python-syntax', { 'for': 'python' }
 
 	""""""""""""""""""""""""""""""
 	" => Git
