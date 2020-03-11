@@ -127,6 +127,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" Improved python highlighting
 	Plug 'vim-python/python-syntax', { 'for': 'python' }
 
+	" nginx configurations
+	Plug 'chr4/nginx.vim'
+
 	""""""""""""""""""""""""""""""
 	" => Git
 	""""""""""""""""""""""""""""""
