@@ -257,11 +257,8 @@ let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g ""'
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 0
 
-" prefer to open in terminal mode in order to use terminal mode mappings
-let g:fzf_prefer_term = 1
-
 " set fzf layout (and open fzf in terminal window for the mappings)
-let g:fzf_layout = {'down': '30%'}
+let g:fzf_layout = {'window': 'bot'.float2nr(&lines * 0.3).'new' }
 
 function! s:configure_fzf_window()
 	" decrease delay to close fzf windows after pressing <Esc>
