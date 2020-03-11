@@ -35,9 +35,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 				\ 'do': './install --all;'
 				\ }
 	" vim configs (provides Ack functionality too)
-	Plug 'junegunn/fzf.vim', {
-				\ 'do': 'git apply \"'.$VIM_PREFIX.'/patches/0001-proper-line-handling-for-complete-function.patch\"; '
-				\ }
+	Plug 'junegunn/fzf.vim'
 
 	" buffer manager
 	Plug 'jlanzarotta/bufexplorer'
