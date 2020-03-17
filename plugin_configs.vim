@@ -396,9 +396,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 nnoremap <silent> <c-m-l> :NERDTreeToggle<cr>
 
 " natrual sort
-let NERDTreeNaturalSort = 1
+let g:NERDTreeNaturalSort = 1
 " close after opening file or bookmark
-let NERDTreeQuitOnOpen = 3
+let g:NERDTreeQuitOnOpen = 3
 
 
 """"""""""""""""""""""""""""""
