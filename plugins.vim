@@ -19,7 +19,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'itchyny/lightline.vim'
 
 	" zen mode
-	Plug 'junegunn/goyo.vim'
+	Plug 'junegunn/goyo.vim', { 'on': ['Goyo'] }
 
 	" colored parentheses
 	Plug 'luochen1990/rainbow'
@@ -38,7 +38,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'junegunn/fzf.vim'
 
 	" buffer manager
-	Plug 'jlanzarotta/bufexplorer'
+	Plug 'jlanzarotta/bufexplorer', { 'on': ['BufExplorer'] }
 
 	" better motions (f,t)
 	Plug 'easymotion/vim-easymotion'
@@ -85,7 +85,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'junegunn/vim-easy-align'
 
 	" emoji support
-	Plug 'junegunn/vim-emoji'
+	Plug 'junegunn/vim-emoji', { 'on': ['Emojify'] }
 
 	" highlight extra whitespaces
 	Plug 'ntpeters/vim-better-whitespace'
@@ -125,7 +125,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'vim-python/python-syntax', { 'for': 'python' }
 
 	" nginx configurations
-	Plug 'chr4/nginx.vim'
+	Plug 'chr4/nginx.vim', {'for': 'nginx'}
 
 	""""""""""""""""""""""""""""""
 	" => Git
@@ -152,7 +152,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" snippets for the manager
 	Plug 'honza/vim-snippets', { 'on': [] }
 
-	" load snippets when it's needed
+	" load snippets on insert
 	augroup load_snippets
 		autocmd!
 		autocmd InsertEnter * call plug#load('ultisnips', 'vim-snippets')
