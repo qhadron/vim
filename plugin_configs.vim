@@ -76,11 +76,11 @@ xmap P <plug>(SubversiveSubstitute)
 
 " cutlass makes default operations not yank
 " use x as "move" binding
-nnoremap m d
-xnoremap m d
+nnoremap x d
+xnoremap x d
 
-nnoremap mm dd
-nnoremap M D
+nnoremap xx dd
+nnoremap X D
 
 " yoink,cutlass compatibility
 let g:yoinkIncludeDeleteOperations = 1
@@ -553,7 +553,6 @@ let g:autopep8_max_line_length=79
 let g:autopep8_indent_size=4
 let g:autopep8_on_save = 1
 let g:autopep8_disable_show_diff=1
-
 
 """"""""""""""""""""""""""""""
 " => python-syntax
