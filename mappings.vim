@@ -16,10 +16,8 @@ map <leader>bD :Bclose!<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
-noremap H :normal! gT<cr>
-noremap L :normal! gt<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 " Remap VIM 0 to first non-blank character
 map 0 ^
@@ -78,4 +76,3 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
