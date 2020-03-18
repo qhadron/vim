@@ -46,11 +46,11 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" better slash searching
 	Plug 'junegunn/vim-slash'
 
-	" NERD tree will be loaded on the first invocation of NERDTreeToggle command
-	Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle'] }
+	" File explorer (netrw replacement)
+	Plug 'scrooloose/nerdtree'
 
 	" Similarly, load NERDTree git status plugin
-	Plug 'Xuyuanp/nerdtree-git-plugin', { 'on': ['NERDTree', 'NERDTreeToggle'] }
+	Plug 'Xuyuanp/nerdtree-git-plugin'
 
 	""""""""""""""""""""""""""""""
 	" => Editing
