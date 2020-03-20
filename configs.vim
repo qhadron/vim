@@ -18,17 +18,9 @@ set nofoldenable
 " Set number of undos
 set undolevels=10000
 
-" Set indenting method
-set cindent
-
 " Spaces are not better than a tab character
 set noexpandtab
 set smarttab
-
-" Who wants an 8 character tab?  Not me!
-set tabstop=4
-set shiftwidth=4
-set softtabstop=0
 
 " Use English for spellchecking, but don't spellcheck by default (speed)
 if version >= 700
