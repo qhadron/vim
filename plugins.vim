@@ -105,6 +105,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" expand single line of code / contract multiple lines of code
 	Plug 'andrewradev/splitjoin.vim'
 
+	" wrapper for unix commands for vim (mv, rm, mkdir, etc)
+	Plug 'tpope/vim-eunuch'
+
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
