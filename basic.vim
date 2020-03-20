@@ -172,8 +172,9 @@ endif
 
 " autoread file changes outside of vim
 set autoread
-" autoload changes (with prompt if modified)
-autocmd FocusGained,BufEnter * :checktime
+" autoload changes (with prompt if modified) only for valid buffers
+" (need to check getcmdwintype since &buftype could not be set for cmd window)
+autocmd FocusGained,BufEnter * if &buftype=='' && getcmdwintype() == ''| checktime | endif
 
 try
 	" enable mouse stuff
