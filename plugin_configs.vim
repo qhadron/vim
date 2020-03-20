@@ -100,7 +100,13 @@ let g:lightline = {
 	\             [ 'readonly', 'filename', 'fugitive' ] ],
 	\   'right': [ [ 'syntastic', 'lineinfo' ],
 	\              [ 'percent' ],
-	\              [ 'fileformat', 'fileencoding', 'filetype', 'sleuth'] ]
+	\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'] ]
+	\ },
+	\ 'inactive': {
+	\   'left': [ [ 'readonly', 'filename', 'fugitive' ] ],
+	\   'right': [ [ 'lineinfo' ],
+	\              [ 'percent' ],
+	\              [ 'fileencoding', 'filetype' ] ]
 	\ },
 	\ 'component': {
 	\   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
