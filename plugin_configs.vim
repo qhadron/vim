@@ -90,8 +90,13 @@ let g:yoinkIncludeDeleteOperations = 1
 """"""""""""""""""""""""""""""
 set noshowmode
 
-" show lightline itself
+" show lightline itsel0
 set laststatus=2
+
+" padding for tab heading
+let s:lightline_tab_min_padding=20
+" extra size for the active tab size
+let s:lightline_tab_active_page_extra=0
 
 let g:lightline = {
 	\ 'colorscheme': 'powerline',
@@ -107,6 +112,13 @@ let g:lightline = {
 	\   'right': [ [ 'lineinfo' ],
 	\              [ 'percent' ],
 	\              [ 'fileencoding', 'filetype' ] ]
+	\ },
+	\ 'tab': {
+	\   'active': [  'tabnum', 'tab_filenames', 'modified'  ],
+	\   'inactive': [  'tabnum', 'tab_filenames', 'modified' ],
+	\ },
+	\ 'tab_component_function': {
+	\   'tab_filenames': 'TabFilenames',
 	\ },
 	\ 'component': {
 	\   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
@@ -135,6 +147,57 @@ function! LightlineFilename()
 	let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
 	let modified = &modified ? ' +' : ''
 	return filename . modified
+endfunction
+
+function! s:expensive_unique(list)
+	let seen = {}
+	let output=[]
+	for item in a:list
+		if ! has_key(seen, item)
+			call add(output, item)
+			let seen[item]=1
+		endif
+	endfor
+	return output
+endfunction
+
+function! TabFilenames(tabnr)
+	let buffers=s:expensive_unique(tabpagebuflist(a:tabnr))
+	let active_buffer=winbufnr(win_getid(tabpagewinnr(a:tabnr), a:tabnr))
+
+	" move active buffer to first
+	call remove(buffers, index(buffers, active_buffer))
+	call insert(buffers, active_buffer)
+
+	" generate names
+	let names=[]
+	for buffer in buffers[ : 2] " get first 3 names
+		let type=getbufvar(buffer, '&buftype', 'nofile')
+		if type == ''
+			let name = bufname(buffer)
+			if name == ''
+				let name = '[No Name]'
+			else
+				let name = simplify(name)
+			endif
+		else
+			let name='['.type.']'
+		endif
+		call add(names, name)
+	endfor
+
+	" trim to a shorter length
+	let result=join(names, ',')
+	let tab_size = float2nr(round(
+		\ ( &columns - s:lightline_tab_min_padding +
+		\   ((tabpagenr() == a:tabnr ? 1.0 : -1.0) * s:lightline_tab_active_page_extra))
+		\ / tabpagenr('$')
+		\ ))-3 " -3 for the dots
+	if len(result)>tab_size
+		let display_len=max([tab_size, len(names[0])])
+		let result = result[:display_len].'...'
+	endif
+	return result
 endfunction
 
 """"""""""""""""""""""""""""""
