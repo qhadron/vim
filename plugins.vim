@@ -127,6 +127,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" nginx configurations
 	Plug 'chr4/nginx.vim', {'for': 'nginx'}
 
+	" plugin for html/css editing (it handles its own filetypes)
+	Plug 'mattn/emmet-vim'
+
 	""""""""""""""""""""""""""""""
 	" => Git
 	""""""""""""""""""""""""""""""

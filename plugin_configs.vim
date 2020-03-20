@@ -559,3 +559,17 @@ let g:autopep8_disable_show_diff=1
 """"""""""""""""""""""""""""""
 let g:python_version_2 = 0
 let g:python_highlight_all = 1
+
+""""""""""""""""""""""""""""""
+" => emmet-vim
+""""""""""""""""""""""""""""""
+" enable in all modes
+let g:user_emmet_mode = 'all'
+" activate emmet features
+let g:user_emmet_leader_key='<c-e>'
+" enable for additional languages
+let g:user_emmet_settings = {
+	\  'xml' : {
+	\    'extends' : 'html',
+	\  }
+	\}
