@@ -94,43 +94,41 @@ set noshowmode
 set laststatus=2
 
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified', 'gitbranch' ] ],
-      \   'right': [ [ 'syntastic', 'lineinfo' ],
-      \              [ 'percent' ],
-      \              [ 'fileformat', 'fileencoding', 'filetype' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head',
-      \   'filename': 'LightlineFilename'
-      \ },
-      \ 'component_expand': {
-      \   'syntastic': 'SyntasticStatuslineFlag',
-      \ },
-      \ 'component_type': {
-      \   'syntastic': 'error',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '|', 'right': '|' }
-      \ }
+	\ 'colorscheme': 'powerline',
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'readonly', 'filename', 'fugitive' ] ],
+	\   'right': [ [ 'syntastic', 'lineinfo' ],
+	\              [ 'percent' ],
+	\              [ 'fileformat', 'fileencoding', 'filetype', 'sleuth'] ]
+	\ },
+	\ 'component': {
+	\   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+	\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+	\   'sleuth': '%{SleuthIndicator()}'
+	\ },
+	\ 'component_visible_condition': {
+	\   'readonly': '(&filetype!="help"&& &readonly)',
+	\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+	\ },
+	\ 'component_function': {
+	\   'filename': 'LightlineFilename',
+	\ },
+	\ 'component_expand': {
+	\   'syntastic': 'SyntasticStatuslineFlag',
+	\ },
+	\ 'component_type': {
+	\   'syntastic': 'error',
+	\ },
+	\ 'separator': { 'left': '', 'right': '' },
+	\ 'subseparator': { 'left': '|', 'right': '|' }
+	\ }
 
 " show filename
 function! LightlineFilename()
-  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
-  let modified = &modified ? ' +' : ''
-  return filename . modified
+	let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+	let modified = &modified ? ' +' : ''
+	return filename . modified
 endfunction
 
 """"""""""""""""""""""""""""""
@@ -171,7 +169,7 @@ set updatetime=100
 """"""""""""""""""""""""""""""
 " YouCompleteMe configs
 if len(glob('~/.ycm.py'))
-	let g:ycm_global_ycm_extra_conf  = '~/.ycm.py'
+	let g:ycm_global_ycm_extra_conf = '~/.ycm.py'
 endif
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_max_num_candidates = 50
@@ -535,8 +533,8 @@ endfunction
 """"""""""""""""""""""""""""""
 " center on screen (zz) and flash search result
 if has('timers')
-  " Blink 2 times with 50ms interval
-  noremap <expr> <plug>(slash-after) 'zz'.slash#blink(3, 50)
+	" Blink 2 times with 50ms interval
+	noremap <expr> <plug>(slash-after) 'zz'.slash#blink(3, 50)
 endif
 
 """"""""""""""""""""""""""""""

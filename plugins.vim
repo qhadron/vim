@@ -99,6 +99,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" text object: comments
 	Plug 'glts/vim-textobj-comment'
 
+	" automatically detect indentation
+	Plug 'tpope/vim-sleuth'
+
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
