@@ -102,6 +102,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" automatically detect indentation
 	Plug 'tpope/vim-sleuth'
 
+	" expand single line of code / contract multiple lines of code
+	Plug 'andrewradev/splitjoin.vim'
+
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
