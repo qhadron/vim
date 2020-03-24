@@ -32,8 +32,8 @@ set softtabstop=0
 
 " Use English for spellchecking, but don't spellcheck by default (speed)
 if version >= 700
-   set spl=en spell
-   set nospell
+	set spl=en spell
+	set nospell
 endif
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
