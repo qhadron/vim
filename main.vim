@@ -12,7 +12,7 @@ source $VIM_PREFIX/plugin_configs.vim
 " Mappings
 source $VIM_PREFIX/mappings.vim
 
-" Main configs
+" Personal configs
 try
 	source $VIM_PREFIX/configs.vim
 catch

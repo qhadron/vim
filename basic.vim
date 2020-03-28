@@ -77,6 +77,7 @@ set nobackup
 set nowb
 set noswapfile
 
+" Turn on some autoindent settings
 set autoindent
 set smartindent
 set wrap
