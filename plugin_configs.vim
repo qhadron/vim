@@ -273,19 +273,24 @@ endfunction
 let s:ycm_keybinds_added = 0
 function! s:addYcmMappings()
 	if ! s:ycm_keybinds_added
-		nnoremap <c-c>D :YcmDiags<CR>
-		nnoremap <c-F5> :YcmForceCompileAndDiagnostics<CR>
-		nnoremap <c-c><F5> :YcmRestartServer<CR>
-		nnoremap <c-c>g :YcmCompleter GoTo<CR>
-		nnoremap <c-c>gd :YcmCompleter GoToDeclaration<CR>
-		nnoremap <c-c>t :YcmCompleter GetType<CR>
-		nnoremap <c-c>d :YcmCompleter GetDoc<CR>
-		nnoremap <c-c>f :YcmCompleter FixIt<CR>
-		nnoremap <c-c><c-f> :YcmCompleter Format<CR>
-		nnoremap <c-c>o :YcmCompleter OrganizeImports<CR>
-		nnoremap <F2> :YcmCompleter RefactorRename
 		let g:ycm_key_detailed_diagnostics = '<c-c><c-d>'
 		let g:ycm_key_invoke_completion = '<C-Space>'
+
+		nnoremap <buffer> <c-c>D :YcmDiags<CR>
+		nnoremap <buffer> <c-F5> :YcmForceCompileAndDiagnostics<CR>
+		nnoremap <buffer> <c-c><F5> :YcmRestartServer<CR>
+		nnoremap <buffer> <c-c>g :YcmCompleter GoTo<CR>
+		nnoremap <buffer> <c-c>gd :YcmCompleter GoToDeclaration<CR>
+		nnoremap <buffer> <c-c>t :YcmCompleter GetType<CR>
+		nnoremap <buffer> <c-c>d :YcmCompleter GetDoc<CR>
+		nnoremap <buffer> <c-c>f :YcmCompleter FixIt<CR>
+		nnoremap <buffer> <c-c><c-f> :YcmCompleter Format<CR>
+		nnoremap <buffer> <c-c>o :YcmCompleter OrganizeImports<CR>
+		nnoremap <buffer> <F2> :YcmCompleter RefactorRename
+		if !has("gui_running")
+			" most terminals send ctrl-space as ^@ (null)
+			imap <buffer> <C-@> <C-space>
+		endif
 		if v:vim_did_enter
 			echom 'YouCompleteMe loaded!'
 		endif
