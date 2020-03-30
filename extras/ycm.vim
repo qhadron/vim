@@ -11,13 +11,13 @@ function s:check_ycm_deps()
 				\'c++': 'build-essential',
 				\'cc': 'build-essential',
 				\ }
-	let missing = {}
+	let s:missing = {}
 	for dep in keys(deps)
 		if !executable(dep)
-			let missing[deps[dep]]=1
+			let s:missing[deps[dep]]=1
 		endif
 	endfor
-	if len(missing) > 0
+	if len(s:missing) > 0
 		return 0
 	else
 		return 1
@@ -86,7 +86,7 @@ function g:PlugYcm()
 	else
 		augroup s:ycm_warning
 			autocmd!
-			execute "autocmd VimEnter * echom 'Install ".join(keys(missing), ', ')." to enable YouCompleteMe.' | autocmd! s:ycm_warning"
+			execute "autocmd VimEnter * echom 'Install ".join(keys(s:missing), ', ')." to enable YouCompleteMe.' | autocmd! s:ycm_warning"
 		augroup END
 	endif
 endfunction
