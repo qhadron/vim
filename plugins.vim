@@ -159,16 +159,18 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" call function to plug correct settings for YCM
 	call g:PlugYcm()
 
-	" snippet manager
-	Plug 'SirVer/ultisnips', { 'on': [] }
-	" snippets for the manager
-	Plug 'honza/vim-snippets', { 'on': [] }
+	if has('python3')
+		" snippet manager
+		Plug 'SirVer/ultisnips', { 'on': [] }
+		" snippets for the manager
+		Plug 'honza/vim-snippets', { 'on': [] }
+		" load snippets on insert
+		augroup load_snippets
+			autocmd!
+			autocmd InsertEnter * call plug#load('ultisnips', 'vim-snippets')
+						\| autocmd! load_snippets
+		augroup END
+	endif
 
-	" load snippets on insert
-	augroup load_snippets
-		autocmd!
-		autocmd InsertEnter * call plug#load('ultisnips', 'vim-snippets')
-					\| autocmd! load_snippets
-	augroup END
 
 call plug#end()
