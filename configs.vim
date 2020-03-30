@@ -95,3 +95,6 @@ endfunction
 " commands to use the functions
 command ProfileStart call s:profile_start()
 command ProfileEnd call s:profile_end()
+
+" reload vimrc on (intentional) write
+autocmd BufWritePost configs.vim if expand('%') ==# $VIM_PREFIX . '/configs.vim' | source $VIM_PREFIX/configs.vim | endif

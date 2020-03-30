@@ -55,9 +55,7 @@ nmap <silent> <leader>w :w<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " edit vimrc
-map <leader>e :e! $VIM_PREFIX/configs.vim<cr>
-" reload vimrc on (intentional) write
-autocmd BufWritePost configs.vim if expand('%') ==# $VIM_PREFIX . '/configs.vim' | source $VIM_PREFIX/configs.vim | endif
+map <leader>e :e! $VIM_PREFIX/main.vim<cr>
 
 " reload customized functions
 nnoremap <leader>r :source $VIM_PREFIX/configs.vim<cr>
