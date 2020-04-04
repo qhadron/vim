@@ -383,8 +383,10 @@ nnoremap <silent> <leader>fc :Commands<CR>
 nnoremap <silent> <leader>fl :BLines<CR>
 " Find global lines
 nnoremap <silent> <leader>fL :Lines<CR>
-" Find filetypes
+" Find tags
 nnoremap <silent> <leader>ft :Filetypes<CR>
+" Find filetypes
+nnoremap <silent> <leader>fT :Filetypes<CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)

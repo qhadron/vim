@@ -49,14 +49,14 @@ nnoremap <leader>Q :qa<cr>
 " Redraw
 map <F5> :redraw!<cr>
 
+" search current Word in tags
+nnoremap <c-t> "ayiW:Tags<space><c-r>a
+
 " visual instead of audio bell
 set visualbell
 
 " set shell to zsh
 set shell=zsh
-
-" add command to open terminal
-nnoremap <silent> <c-t> :tabnew +terminal++curwin<cr>
 
 " 1 line high command line
 set cmdheight=1
