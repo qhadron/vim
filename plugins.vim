@@ -170,6 +170,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 			autocmd InsertEnter * call plug#load('ultisnips', 'vim-snippets')
 						\| autocmd! load_snippets
 		augroup END
+	else
+		echo "Need vim with +python3 to enable snippet support"
 	endif
 
 
