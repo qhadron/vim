@@ -117,6 +117,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" markdown support
 	Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+	" markdown preview
+	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 	" mustache/handlebars support
 	Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }

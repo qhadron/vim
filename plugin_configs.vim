@@ -664,3 +664,10 @@ let g:user_emmet_settings = {
 	\    'extends' : 'html',
 	\  }
 	\}
+
+""""""""""""""""""""""""""""""
+" => markdown-preview.nvim
+""""""""""""""""""""""""""""""
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_command_for_global = 1
