@@ -632,7 +632,7 @@ let g:autopep8_disable_show_diff=1
 function! s:check_load_pep8()
 	" actually make sure autopep8 is real!
 	" pyenv creates fake shims that are executable but fails
-	if executable('autopep8') && system('autopep8 --version') && v:shell_error==0
+	if executable('autopep8') && !empty(system('autopep8 --version')) && v:shell_error==0
 		let g:autopep8_on_save = 1
 		setlocal equalprg=autopep8
 	else
