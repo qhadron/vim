@@ -634,7 +634,6 @@ function! s:check_load_pep8()
 	" pyenv creates fake shims that are executable but fails
 	if executable('autopep8') && !empty(system('autopep8 --version')) && v:shell_error==0
 		let g:autopep8_on_save = 1
-		setlocal equalprg=autopep8
 	else
 		echohl WarningMsg
 		echo 'autopep8 is not executable...'
