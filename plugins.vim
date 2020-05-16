@@ -119,6 +119,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 	" markdown preview
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+	" paste images for markdown
+	Plug 'ferrine/md-img-paste.vim', { 'as': 'md-img-paste', 'for': 'markdown' }
 
 	" mustache/handlebars support
 	Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }

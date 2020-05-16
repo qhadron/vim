@@ -673,3 +673,16 @@ let g:user_emmet_settings = {
 let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 1
 let g:mkdp_command_for_global = 1
+
+
+""""""""""""""""""""""""""""""
+" => md-img-paste
+""""""""""""""""""""""""""""""
+autocmd FileType markdown nnoremap <buffer><silent> <leader>pi :call mdip#MarkdownClipboardImage()<CR>
+let g:mdip_imgdir = 'img'
+let g:mdip_imgname = 'pasted_image'
+
+augroup s:markdown_image_paste
+	autocmd!
+	autocmd! User md-img-paste if ! executable('xclip') | echoe "Install xclip to paste images" | endif
+augroup END
