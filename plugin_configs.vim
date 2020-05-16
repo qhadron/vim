@@ -535,10 +535,13 @@ let g:strip_whitespace_confirm=0
 " strip whitespace at eof?
 let g:strip_whitelines_at_eof=1
 
-" disable whitespace checking for term normal mode
 augroup disable_whitespace
 	autocmd!
+	" disable whitespace checking for term normal mode
 	autocmd TerminalOpen * DisableWhitespace
+	" disable whitespace checking for markdown
+	" (some variantes use 2 spaces for line break)
+	autocmd FileType markdown DisableWhitespace
 augroup END
 
 """"""""""""""""""""""""""""""
