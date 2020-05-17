@@ -443,8 +443,10 @@ let g:goyo_linenr = 0
 """"""""""""""""""""""""""""""
 " => vim-markdown
 """"""""""""""""""""""""""""""
-" disable folding for better performance
-let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_folding_disabled = 0
+" add message: disable folding for better performance
+autocmd User vim-markdown echom 'disable markdown folding for better performance (help vim-markdown-disable-folding)'
+
 " don't add indent levels on new list items
 let g:vim_markdown_new_list_item_indent = 0
 " enable strikethrough
