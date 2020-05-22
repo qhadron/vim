@@ -32,8 +32,13 @@ set softtabstop=0
 
 " Use English for spellchecking, but don't spellcheck by default (speed)
 if version >= 700
-	set spl=en spell
+	set spl=en_ca spell
 	set nospell
+endif
+
+" set location of dictionary
+if !empty(glob('/usr/share/dict/words'))
+	set dictionary+='/usr/share/dict/words'
 endif
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
