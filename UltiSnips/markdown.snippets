@@ -1,7 +1,12 @@
+# import for math snippets
+extends tex
+
+# creates a spoiler in the markdown document
+# b: only expand from beginning of line (spoilers buggy otherwise)
 snippet spoiler "collapsable section" b
 <details>
-	<summary>${1:Spoiler}</summary>
+<summary>${1:Spoiler}</summary>
 
-	${0}
+${0}
 </details>
 endsnippet
