@@ -544,6 +544,9 @@ augroup disable_whitespace
 	" disable whitespace checking for markdown
 	" (some variantes use 2 spaces for line break)
 	autocmd FileType markdown DisableWhitespace
+	" disable whitespace checking for snippets
+	" (sometimes it's useful to have spaces at the end)
+	autocmd FileType snippets DisableWhitespace
 augroup END
 
 """"""""""""""""""""""""""""""
