@@ -679,6 +679,15 @@ let g:mkdp_auto_start = 0
 let g:mkdp_auto_close = 0
 let g:mkdp_command_for_global = 1
 
+" refresh on save or leave insert mode
+" (sometimes it takes a long time to render after many updates)
+let g:mkdp_refresh_slow = 1
+
+" output only html for speed (no MathML for accessibility)
+let g:mkdp_preview_options.katex = {
+			\ 'output': 'html',
+			\ }
+
 
 """"""""""""""""""""""""""""""
 " => md-img-paste
