@@ -449,6 +449,8 @@ autocmd User vim-markdown echom 'disable markdown folding for better performance
 
 " don't add indent levels on new list items
 let g:vim_markdown_new_list_item_indent = 0
+" don't auto insert bulletpoints
+let g:vim_markdown_auto_insert_bullets = 0
 " enable strikethrough
 let g:vim_markdown_strikethrough = 1
 " enable json
