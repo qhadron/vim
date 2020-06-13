@@ -1,0 +1,28 @@
+# w to expand on word boundary
+snippet partial "partial derivative" w
+\frac{\partial ${1}}{\partial ${2}} 
+endsnippet
+
+snippet frac "fraction" i
+\frac{${1}}{${2}}
+endsnippet
+
+snippet case "case of cases"
+${1} &\text{ ${3:if} } ${2} \\\\
+endsnippet
+
+snippet cases "math cases"
+\begin{cases}
+${0:case}
+\end{cases}
+endsnippet
+
+snippet lim "limit" i
+\lim_{${1:x} \to ${2:0}} 
+endsnippet
+
+snippet ald "aligned enviroment" i
+\begin{aligned}
+${1}
+\end{aligned}
+endsnippet
