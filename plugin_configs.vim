@@ -444,8 +444,12 @@ let g:goyo_linenr = 0
 " => vim-markdown
 """"""""""""""""""""""""""""""
 let g:vim_markdown_folding_disabled = 0
-" add message: disable folding for better performance
-autocmd User vim-markdown echom 'disable markdown folding for better performance (help vim-markdown-disable-folding)'
+augroup s:vim_markdown
+	autocmd!
+	" add message: disable folding for better performance
+	autocmd User vim-markdown echom 'disable markdown folding for better performance (help vim-markdown-disable-folding)'
+augroup end
+
 
 " don't add indent levels on new list items
 let g:vim_markdown_new_list_item_indent = 0
@@ -468,8 +472,12 @@ map <Plug> <Plug>Markdown_MoveToCurHeader
 " => Nerd tree
 """"""""""""""""""""""""""""""
 " open nerdtree if input is a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | call feedkeys("A") | exe 'cd '.argv()[0] | endif
+augroup s:nerd_tree
+	autocmd!
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | call feedkeys("A") | exe 'cd '.argv()[0] | endif
+augroup end
+
 " mapping to toggle nerdtree
 nnoremap <silent> <c-m-l> :NERDTreeToggle<cr>
 
@@ -539,7 +547,7 @@ let g:strip_whitespace_confirm=0
 " strip whitespace at eof?
 let g:strip_whitelines_at_eof=1
 
-augroup disable_whitespace
+augroup s:vim_better_whitespace
 	autocmd!
 	" disable whitespace checking for term normal mode
 	autocmd TerminalOpen * DisableWhitespace
@@ -583,20 +591,20 @@ let g:vimtex_compiler_latexmk = {
 	\ ],
 	\}
 
-augroup vimtex_customization
+augroup s:vimtex
 	autocmd!
 	autocmd User VimtexEventInitPost call s:on_vimtex_load()
 	autocmd User VimtexCompileStarted call s:vimtex_build_folder()
 augroup END
 
-function s:on_vimtex_load()
+function! s:on_vimtex_load()
 	" add fzf integration
 	nnoremap <localleader>lf :call vimtex#fzf#run()<cr>
 	" make vimtex build folder
 	call s:vimtex_build_folder()
 endfunction
 
-function s:vimtex_build_folder()
+function! s:vimtex_build_folder()
 	let old_path=getcwd()
 	execute 'cd '.expand('%:h:p')
 	" if build folder is not a directory delete it
@@ -652,7 +660,11 @@ function! s:check_load_pep8()
 	endif
 endfunction
 
-autocmd! FileType python call s:check_load_pep8()
+augroup s:autopep8
+	autocmd!
+	autocmd FileType python call s:check_load_pep8()
+augroup end
+
 
 """"""""""""""""""""""""""""""
 " => python-syntax
@@ -697,11 +709,11 @@ let g:mkdp_preview_options.katex = {
 """"""""""""""""""""""""""""""
 " => md-img-paste
 """"""""""""""""""""""""""""""
-autocmd FileType markdown nnoremap <buffer><silent> <leader>pi :call mdip#MarkdownClipboardImage()<CR>
 let g:mdip_imgdir = 'img'
 let g:mdip_imgname = 'pasted_image'
 
 augroup s:markdown_image_paste
 	autocmd!
-	autocmd! User md-img-paste if ! executable('xclip') | echoe "Install xclip to paste images" | endif
+	autocmd FileType markdown nnoremap <buffer><silent> <leader>pi :call mdip#MarkdownClipboardImage()<CR>
+	autocmd User md-img-paste if ! executable('xclip') | echoe "Install xclip to paste images" | endif
 augroup END

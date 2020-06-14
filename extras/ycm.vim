@@ -1,4 +1,4 @@
-function s:check_ycm_deps()
+function! s:check_ycm_deps()
 	" dict of executable: package
 	"   python3 to run the install script
 	"   cmake for the make files
@@ -25,7 +25,7 @@ function s:check_ycm_deps()
 endfunction
 
 " check dependencies and add them as flags
-function s:get_ycm_flags()
+function! s:get_ycm_flags()
 	" filetypes to load ycm for on insert (use mapping for performance)
 	let g:ycm_filetypes = {'cpp':1, 'c':1, 'python':1 }
 
@@ -56,14 +56,14 @@ function s:get_ycm_flags()
 	return ycm_flags
 endfunction
 
-function s:check_load_ycm()
+function! s:check_load_ycm()
 	if get(g:ycm_filetypes, &filetype, 0)
 		call plug#load('YouCompleteMe')
 		autocmd! load_ycm
 	endif
 endfunction
 
-function g:PlugYcm()
+function! g:PlugYcm()
 	if s:check_ycm_deps()
 
 		let flags=s:get_ycm_flags()
