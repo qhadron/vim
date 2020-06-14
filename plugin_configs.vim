@@ -246,8 +246,6 @@ let g:ycm_warning_symbol = '##'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_auto_trigger = 1
-" which filetypes to unblacklist for YCM
-let g:ycm_filetype_unblacklist = ['markdown', 'text']
 
 let s:ycm_identifiers_disabled=0
 function! s:ycm_toggle_identifiers(force_disable)
@@ -270,39 +268,27 @@ function! s:ycm_toggle_identifiers(force_disable)
 	endtry
 endfunction
 
-let s:ycm_keybinds_added = 0
 function! s:addYcmMappings()
-	if ! s:ycm_keybinds_added
+	if ! exists("s:ycm_keybinds_added") || ! s:ycm_keybinds_added
+		let s:ycm_keybinds_added = 1
+
 		let g:ycm_key_detailed_diagnostics = '<c-c><c-d>'
 		let g:ycm_key_invoke_completion = '<C-Space>'
 
-		nnoremap <buffer> <c-c>D :YcmDiags<CR>
-		nnoremap <buffer> <c-F5> :YcmForceCompileAndDiagnostics<CR>
-		nnoremap <buffer> <c-c><F5> :YcmRestartServer<CR>
-		nnoremap <buffer> <c-c>g :YcmCompleter GoTo<CR>
-		nnoremap <buffer> <c-c>gd :YcmCompleter GoToDeclaration<CR>
-		nnoremap <buffer> <c-c>t :YcmCompleter GetType<CR>
-		nnoremap <buffer> <c-c>d :YcmCompleter GetDoc<CR>
-		nnoremap <buffer> <c-c>f :YcmCompleter FixIt<CR>
-		nnoremap <buffer> <c-c><c-f> :YcmCompleter Format<CR>
-		nnoremap <buffer> <c-c>o :YcmCompleter OrganizeImports<CR>
-		nnoremap <buffer> <F2> :YcmCompleter RefactorRename
+		nnoremap <c-c>D :YcmDiags<CR>
+		nnoremap <c-F5> :YcmForceCompileAndDiagnostics<CR>
+		nnoremap <c-c><F5> :YcmRestartServer<CR>
+		nnoremap <c-c>g :YcmCompleter GoTo<CR>
+		nnoremap <c-c>gd :YcmCompleter GoToDeclaration<CR>
+		nnoremap <c-c>t :YcmCompleter GetType<CR>
+		nnoremap <c-c>d :YcmCompleter GetDoc<CR>
+		nnoremap <c-c>f :YcmCompleter FixIt<CR>
+		nnoremap <c-c><c-f> :YcmCompleter Format<CR>
+		nnoremap <c-c>o :YcmCompleter OrganizeImports<CR>
+		nnoremap <F2> :YcmCompleter RefactorRename
 		if !has("gui_running")
 			" most terminals send ctrl-space as ^@ (null)
-			imap <buffer> <C-@> <C-space>
-		endif
-		if v:vim_did_enter
-			echom 'YouCompleteMe loaded!'
-		endif
-		let s:ycm_keybinds_added = 1
-
-		" disable blacklist for some files
-		if exists('g:ycm_filetype_blacklist')
-			for key in g:ycm_filetype_unblacklist
-				if exists('g:ycm_filetype_blacklist.'.key)
-					call remove(g:ycm_filetype_blacklist, key)
-				endif
-			endfor
+			imap <C-@> <C-space>
 		endif
 
 		" use YCMToggleTextMode! to force disable text mode
@@ -310,14 +296,13 @@ function! s:addYcmMappings()
 
 		" add a mapping for that
 		nnoremap <silent> <leader>yt :YCMToggleIdentifiers<cr>
-
 	endif
 endfunction
 
 " YouCompleteMe mappings
 augroup s:YCM_Mappings
-	autocmd! User YouCompleteMe call s:addYcmMappings()
-				\| autocmd! s:YCM_Mappings
+	autocmd!
+	autocmd User YouCompleteMe ++once call s:addYcmMappings()
 augroup END
 
 """"""""""""""""""""""""""""""

@@ -63,6 +63,21 @@ function! s:check_load_ycm()
 	endif
 endfunction
 
+function! s:enable_ycm()
+	" disable blacklist for the current filetype
+	if exists('g:ycm_filetype_blacklist')
+		if exists('g:ycm_filetype_blacklist.'.&l:filetype)
+			call remove(g:ycm_filetype_blacklist, &l:filetype)
+			echo "YCM enabled for ".&l:filetype
+		endif
+	endif
+endfunction
+
+augroup s:YCM
+	autocmd!
+	autocmd User YouCompleteMe call s:enable_ycm() | if v:vim_did_enter | echo 'YouCompleteMe loaded!' | endif
+augroup end
+
 function! g:PlugYcm()
 	if s:check_ycm_deps()
 
@@ -75,7 +90,7 @@ function! g:PlugYcm()
 					\}
 
 		" command to enable YCM (triggers vim-plug)
-		command! YCM call plug#load('YouCompleteMe')
+		command! YCM call plug#load('YouCompleteMe') | call s:enable_ycm()
 
 		" load ycm when it's needed
 		augroup load_ycm
