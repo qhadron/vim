@@ -701,8 +701,8 @@ let g:mkdp_command_for_global = 1
 let g:mkdp_refresh_slow = 1
 
 " output only html for speed (no MathML for accessibility)
-let g:mkdp_preview_options.katex = {
-			\ 'output': 'html',
+let g:mkdp_preview_options = {
+			\ 'katex' : { 'output': 'html' },
 			\ }
 
 
