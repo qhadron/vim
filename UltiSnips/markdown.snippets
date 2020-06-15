@@ -10,3 +10,16 @@ snippet spoiler "collapsable section" b
 ${0}
 </details>
 endsnippet
+
+#### Tex Shortcuts ####
+# (most renderers can't define commands or import physics package)
+
+# tex vector norm shortcut
+snippet \norm "vector norm" i
+\lVert${1: }\rVert
+endsnippet
+
+# vector shortcut
+snippet \vec "vector" i
+\vec\{${1:x}\}
+endsnippet
