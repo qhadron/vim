@@ -43,7 +43,6 @@ endif
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <Esc>
-nnoremap JJJJ <Nop>
 
 " Get rid of Ex mode
 nnoremap Q <nop>
