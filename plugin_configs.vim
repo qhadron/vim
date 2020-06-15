@@ -690,6 +690,16 @@ let g:mkdp_preview_options = {
 			\ 'katex' : { 'output': 'html' },
 			\ }
 
+function! s:mkdp_restart()
+	if !exists('*mkdp#util#toggle_preview')
+		return
+	endif
+	call mkdp#util#stop_preview()
+	call mkdp#util#open_preview_page()
+endfunction
+
+command! MKDPRestart call s:mkdp_restart()
+
 
 """"""""""""""""""""""""""""""
 " => md-img-paste
