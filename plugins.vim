@@ -143,6 +143,15 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" plugin for html/css editing (it handles its own filetypes)
 	Plug 'mattn/emmet-vim'
 
+	" better javascript highlighting
+	Plug 'yuezk/vim-js'
+
+	" typescript support
+	Plug 'HerringtonDarkholme/yats.vim'
+
+	" jsx/tsx highlighting and extras
+	Plug 'maxmellon/vim-jsx-pretty'
+
 	""""""""""""""""""""""""""""""
 	" => Git
 	""""""""""""""""""""""""""""""
