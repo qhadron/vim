@@ -103,9 +103,10 @@ let g:lightline = {
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ],
 	\             [ 'readonly', 'filename', 'fugitive' ] ],
-	\   'right': [ [ 'syntastic', 'lineinfo' ],
+	\   'right': [ [ 'lineinfo' ],
 	\              [ 'percent' ],
-	\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'] ]
+	\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'],
+    \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ] ]
 	\ },
 	\ 'inactive': {
 	\   'left': [ [ 'readonly', 'filename', 'fugitive' ] ],
@@ -133,14 +134,30 @@ let g:lightline = {
 	\   'filename': 'LightlineFilename',
 	\ },
 	\ 'component_expand': {
-	\   'syntastic': 'SyntasticStatuslineFlag',
 	\ },
 	\ 'component_type': {
-	\   'syntastic': 'error',
 	\ },
 	\ 'separator': { 'left': '', 'right': '' },
 	\ 'subseparator': { 'left': '|', 'right': '|' }
 	\ }
+
+" lightline-ale configuration
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ }
+
+" lightline-ale configuration
+let g:lightline.component_type = {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
 
 " show filename
 function! LightlineFilename()
@@ -199,17 +216,6 @@ function! TabFilenames(tabnr)
 	endif
 	return result
 endfunction
-
-""""""""""""""""""""""""""""""
-" => syntastic
-""""""""""""""""""""""""""""""
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_auto_jump = 0
-
 
 """"""""""""""""""""""""""""""
 " => git gutter

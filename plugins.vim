@@ -113,7 +113,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
 
 	" syntax checking
-	Plug 'vim-syntastic/syntastic'
+	Plug 'dense-analysis/ale'
+	" lightline plugin for ale
+	Plug 'maximbaz/lightline-ale'
 
 	" markdown support
 	Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
