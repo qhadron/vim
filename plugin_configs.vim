@@ -370,7 +370,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 " Marketplace
-nnoremap <silent><nowait> <space>m  :<C-u>CocListmar<CR>
+nnoremap <silent><nowait> <space>m  :<C-u>CocList marketplace<CR>
 
 """"""""""""""""""""""""""""""
 " => fzf
