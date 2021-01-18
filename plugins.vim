@@ -166,7 +166,13 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
 
 	" completion plugin: conquer of completion
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': []}
+    " loading on insert is necessary since some mappings (i.e. gd) gets
+    " overwritten by other plugins (i.e. vim-slash)
+	augroup load_coc
+		autocmd!
+		autocmd InsertEnter * ++once call plug#load('coc.nvim')
+	augroup END
 
 	" comment/uncomment with proper escaping
 	Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
