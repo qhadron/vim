@@ -1,0 +1,12 @@
+{
+    "suggest.timeout": 5000,
+    "list.normalMappings": {
+        "<C-c>": "do:exit"
+    },
+    "list.insertMappings": {
+        "<C-c>": "do:exit"
+    },
+    "coc.preferences.jumpCommand": "drop",
+    "coc.source.ultisnips.priority": 101,
+    "coc.source.ultisnips.disableSyntaxes": ["string", "comment"]
+}

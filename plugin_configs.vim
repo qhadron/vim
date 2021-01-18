@@ -243,7 +243,7 @@ set updatetime=100
 """"""""""""""""""""""""""""""
 " => coc
 """"""""""""""""""""""""""""""
-let g:coc_global_extensions = ['coc-marketplace']
+let g:coc_global_extensions = ['coc-marketplace', 'coc-ultisnips']
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
