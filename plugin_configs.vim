@@ -102,7 +102,7 @@ let g:lightline = {
 	\ 'colorscheme': 'powerline',
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'readonly', 'filename', 'fugitive' ] ],
+	\             [ 'coc-status', 'readonly', 'filename', 'fugitive' ] ],
 	\   'right': [ [ 'lineinfo' ],
 	\              [ 'percent' ],
 	\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'],
@@ -132,6 +132,7 @@ let g:lightline = {
 	\ },
 	\ 'component_function': {
 	\   'filename': 'LightlineFilename',
+	\   'cocstatus': 'coc#status'
 	\ },
 	\ 'component_expand': {
 	\ },
@@ -239,78 +240,137 @@ endif
 " set update time to make changes realtime
 set updatetime=100
 
+""""""""""""""""""""""""""""""
+" => coc
+""""""""""""""""""""""""""""""
+let g:coc_global_extensions = ['coc-marketplace']
 
-""""""""""""""""""""""""""""""
-" => YouCompleteMe
-""""""""""""""""""""""""""""""
-" YouCompleteMe configs
-if len(glob('~/.ycm.py'))
-	let g:ycm_global_ycm_extra_conf = '~/.ycm.py'
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
 endif
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_max_num_candidates = 50
-let g:ycm_warning_symbol = '##'
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_auto_trigger = 1
 
-let s:ycm_identifiers_disabled=0
-function! s:ycm_toggle_identifiers(force_disable)
-	if !a:force_disable && !s:ycm_identifiers_disabled
-		echom "Disabling YCM identifier completion..."
-		let s:ycm_identifiers_disabled=1
-		let s:old_ycm_min_num_of_chars_for_completion=g:ycm_min_num_of_chars_for_completion
-		let g:ycm_min_num_of_chars_for_completion=99
-	else
-		echom "Restoring YCM identifier completion..."
-		let s:ycm_identifiers_disabled=0
-		try
-			let g:ycm_min_num_of_chars_for_completion=s:old_ycm_min_num_of_chars_for_completion
-		catch
-		endtry
-	endif
-	try
-		silent YcmRestartServer
-	catch
-	endtry
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
 endfunction
 
-function! s:addYcmMappings()
-	if ! exists("s:ycm_keybinds_added") || ! s:ycm_keybinds_added
-		let s:ycm_keybinds_added = 1
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-		let g:ycm_key_detailed_diagnostics = '<c-c><c-d>'
-		let g:ycm_key_invoke_completion = '<C-Space>'
+" Symbol renaming.
+nmap <F2> <Plug>(coc-rename)
 
-		nnoremap <c-c>D :YcmDiags<CR>
-		nnoremap <c-F5> :YcmForceCompileAndDiagnostics<CR>
-		nnoremap <c-c><F5> :YcmRestartServer<CR>
-		nnoremap <c-c>g :YcmCompleter GoTo<CR>
-		nnoremap <c-c>gd :YcmCompleter GoToDeclaration<CR>
-		nnoremap <c-c>t :YcmCompleter GetType<CR>
-		nnoremap <c-c>d :YcmCompleter GetDoc<CR>
-		nnoremap <c-c>f :YcmCompleter FixIt<CR>
-		nnoremap <c-c><c-f> :YcmCompleter Format<CR>
-		nnoremap <c-c>o :YcmCompleter OrganizeImports<CR>
-		nnoremap <F2> :YcmCompleter RefactorRename
-		if !has("gui_running")
-			" most terminals send ctrl-space as ^@ (null)
-			imap <C-@> <C-space>
-		endif
+" Formatting selected code.
+xmap <leader>F  <Plug>(coc-format-selected)
+nmap <leader>F  <Plug>(coc-format-selected)
 
-		" use YCMToggleTextMode! to force disable text mode
-		command -bang YCMToggleIdentifiers call s:ycm_toggle_identifiers(<bang>0)
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
-		" add a mapping for that
-		nnoremap <silent> <leader>yt :YCMToggleIdentifiers<cr>
-	endif
-endfunction
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-" YouCompleteMe mappings
-augroup s:YCM_Mappings
-	autocmd!
-	autocmd User YouCompleteMe ++once call s:addYcmMappings()
-augroup END
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" Marketplace
+nnoremap <silent><nowait> <space>m  :<C-u>CocListmar<CR>
 
 """"""""""""""""""""""""""""""
 " => fzf

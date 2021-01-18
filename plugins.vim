@@ -1,6 +1,3 @@
-" source YCM configs
-source $VIM_PREFIX/extras/ycm.vim
-
 " start plugin list
 call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
@@ -168,11 +165,11 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" => Programming
 	""""""""""""""""""""""""""""""
 
+	" completion plugin: conquer of completion
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 	" comment/uncomment with proper escaping
 	Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
-
-	" call function to plug correct settings for YCM
-	call g:PlugYcm()
 
 	if has('python3')
 		" snippet manager
