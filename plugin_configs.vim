@@ -102,11 +102,11 @@ let g:lightline = {
 	\ 'colorscheme': 'powerline',
 	\ 'active': {
 	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'coc-status', 'readonly', 'filename', 'fugitive' ] ],
+	\             [ 'readonly', 'filename', 'fugitive' ],
+	\             [ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]],
 	\   'right': [ [ 'lineinfo' ],
 	\              [ 'percent' ],
-	\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'],
-    \              [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ] ]
+	\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'] ]
 	\ },
 	\ 'inactive': {
 	\   'left': [ [ 'readonly', 'filename', 'fugitive' ] ],
@@ -142,23 +142,16 @@ let g:lightline = {
 	\ 'subseparator': { 'left': '|', 'right': '|' }
 	\ }
 
-" lightline-ale configuration
-let g:lightline.component_expand = {
-      \  'linter_checking': 'lightline#ale#checking',
-      \  'linter_infos': 'lightline#ale#infos',
-      \  'linter_warnings': 'lightline#ale#warnings',
-      \  'linter_errors': 'lightline#ale#errors',
-      \  'linter_ok': 'lightline#ale#ok',
-      \ }
+" change symbols
+let g:lightline#coc#indicator_warnings='⚠️ '
+let g:lightline#coc#indicator_errors='ⓧ '
+let g:lightline#coc#indicator_info='ⓘ '
+let g:lightline#coc#indicator_hints='❔'
+let g:lightline#coc#indicator_ok='✔️ '
 
-" lightline-ale configuration
-let g:lightline.component_type = {
-      \     'linter_checking': 'right',
-      \     'linter_infos': 'right',
-      \     'linter_warnings': 'warning',
-      \     'linter_errors': 'error',
-      \     'linter_ok': 'right',
-      \ }
+" register coc components
+call lightline#coc#register()
+
 
 " show filename
 function! LightlineFilename()
@@ -243,8 +236,6 @@ set updatetime=100
 """"""""""""""""""""""""""""""
 " => coc
 """"""""""""""""""""""""""""""
-let g:coc_global_extensions = ['coc-marketplace', 'coc-ultisnips']
-
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 

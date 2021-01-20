@@ -109,11 +109,6 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
 
-	" syntax checking
-	Plug 'dense-analysis/ale'
-	" lightline plugin for ale
-	Plug 'maximbaz/lightline-ale'
-
 	" markdown support
 	Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 	" markdown preview
@@ -167,12 +162,36 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" completion plugin: conquer of completion
 	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': []}
+    " lightline plugin
+    Plug 'josa42/vim-lightline-coc'
+
     " loading on insert is necessary since some mappings (i.e. gd) gets
     " overwritten by other plugins (i.e. vim-slash)
 	augroup load_coc
 		autocmd!
 		autocmd InsertEnter * ++once call plug#load('coc.nvim')
 	augroup END
+	command! COC call plug#load('coc.nvim') | CocEnable
+
+
+	" coc extensions
+	let g:coc_global_extensions = []
+	" easily install extension
+	let g:coc_global_extensions += ['coc-marketplace']
+	" snippets
+	let g:coc_global_extensions += ['coc-ultisnips']
+	" json support & coc-settings.json autocomplete
+	let g:coc_global_extensions += ['coc-json']
+	" vimscript support
+	let g:coc_global_extensions += ['coc-vimlsp']
+	" diagnostic server: linting & formatting support
+	let g:coc_global_extensions += ['coc-diagnostic']
+	" grammarly suggestions
+	let g:coc_global_extensions += ['coc-grammarly']
+	" python
+	let g:coc_global_extensions += ['coc-jedi']
+
+
 
 	" comment/uncomment with proper escaping
 	Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
