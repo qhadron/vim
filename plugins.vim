@@ -106,6 +106,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" wrapper for unix commands for vim (mv, rm, mkdir, etc)
 	Plug 'tpope/vim-eunuch'
 
+	" automatic view sessions
+	Plug 'zhimsel/vim-stay'
+
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""

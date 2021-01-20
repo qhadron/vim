@@ -779,3 +779,12 @@ augroup s:markdown_image_paste
 	autocmd FileType markdown nnoremap <buffer><silent> <leader>pi :call mdip#MarkdownClipboardImage()<CR>
 	autocmd User md-img-paste if ! executable('xclip') | echoe "Install xclip to paste images" | endif
 augroup END
+
+""""""""""""""""""""""""""""""
+" => vim-stay
+""""""""""""""""""""""""""""""
+" required for this plugin
+set viewoptions=cursor,folds,slash,unix,curdir
+" set view directory to a temporary directory
+let &viewdir=$VIM_PREFIX."/temp_dirs/view"
+
