@@ -109,6 +109,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" automatic view sessions
 	Plug 'zhimsel/vim-stay'
 
+	" faster folds by updating slower
+	Plug 'Konfekt/FastFold'
+
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
