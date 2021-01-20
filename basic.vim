@@ -1,3 +1,4 @@
+" vim: tabstop=4 shiftwidth=4 noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
 set history=10000

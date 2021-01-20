@@ -1,3 +1,4 @@
+" vim: tabstop=4 shiftwidth=4 noexpandtab
 "rebinds semicolon to colon (easier to type)
 nmap ; :
 
