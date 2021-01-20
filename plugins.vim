@@ -137,6 +137,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'tell-k/vim-autopep8', { 'for': 'python' }
 	" Improved python highlighting
 	Plug 'vim-python/python-syntax', { 'for': 'python' }
+	" python folding
+	Plug 'tmhedberg/SimpylFold'
 
 	" nginx configurations
 	Plug 'chr4/nginx.vim', {'for': 'nginx'}
