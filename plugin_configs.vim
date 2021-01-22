@@ -781,12 +781,10 @@ augroup s:markdown_image_paste
 augroup END
 
 """"""""""""""""""""""""""""""
-" => vim-stay
+" => vim-workspace
 """"""""""""""""""""""""""""""
-" required for this plugin
-set viewoptions=cursor,folds,slash,unix,curdir
-" set view directory to a temporary directory
-let &viewdir=$VIM_PREFIX."/temp_dirs/view"
+let g:workspace_session_directory = $VIM_PREFIX."/temp_dirs/sessions/"
+let g:workspace_session_disable_on_args = 1
 
 """"""""""""""""""""""""""""""
 " => FastFold

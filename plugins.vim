@@ -106,8 +106,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" wrapper for unix commands for vim (mv, rm, mkdir, etc)
 	Plug 'tpope/vim-eunuch'
 
-	" automatic view sessions
-	Plug 'zhimsel/vim-stay'
+	" vim session management
+	Plug 'thaerkh/vim-workspace'
 
 	" faster folds by updating slower
 	Plug 'Konfekt/FastFold'
