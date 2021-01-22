@@ -201,6 +201,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	let g:coc_global_extensions += ['coc-pyright']
 	" javascript/typescript
 	let g:coc_global_extensions += ['coc-eslint', 'coc-tsserver']
+	" calculator for numerical expressions
+	let g:coc_global_extensions += ['coc-calc']
 
 
 
