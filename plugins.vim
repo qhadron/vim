@@ -1,6 +1,4 @@
-" source YCM configs
-source $VIM_PREFIX/extras/ycm.vim
-
+" vim: tabstop=4 shiftwidth=4 noexpandtab
 " start plugin list
 call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
@@ -108,14 +106,15 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" wrapper for unix commands for vim (mv, rm, mkdir, etc)
 	Plug 'tpope/vim-eunuch'
 
+	" vim session management
+	Plug 'thaerkh/vim-workspace'
+
+	" faster folds by updating slower
+	Plug 'Konfekt/FastFold'
+
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
-
-	" syntax checking
-	Plug 'dense-analysis/ale'
-	" lightline plugin for ale
-	Plug 'maximbaz/lightline-ale'
 
 	" markdown support
 	Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
@@ -138,6 +137,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'tell-k/vim-autopep8', { 'for': 'python' }
 	" Improved python highlighting
 	Plug 'vim-python/python-syntax', { 'for': 'python' }
+	" python folding
+	Plug 'tmhedberg/SimpylFold'
 
 	" nginx configurations
 	Plug 'chr4/nginx.vim', {'for': 'nginx'}
@@ -168,11 +169,43 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" => Programming
 	""""""""""""""""""""""""""""""
 
+	" completion plugin: conquer of completion
+	Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': []}
+    " lightline plugin
+    Plug 'josa42/vim-lightline-coc'
+
+    " loading on insert is necessary since some mappings (i.e. gd) gets
+    " overwritten by other plugins (i.e. vim-slash)
+	augroup load_coc
+		autocmd!
+		autocmd InsertEnter * ++once call plug#load('coc.nvim')
+	augroup END
+	command! COC call plug#load('coc.nvim') | doautocmd User coc.nvim | CocEnable
+
+
+	" coc extensions
+	let g:coc_global_extensions = []
+	" easily install extension
+	let g:coc_global_extensions += ['coc-marketplace']
+	" snippets
+	let g:coc_global_extensions += ['coc-ultisnips']
+	" json support & coc-settings.json autocomplete
+	let g:coc_global_extensions += ['coc-json']
+	" vimscript support
+	let g:coc_global_extensions += ['coc-vimlsp']
+	" diagnostic server: linting & formatting support
+	let g:coc_global_extensions += ['coc-diagnostic']
+	" grammarly suggestions
+	let g:coc_global_extensions += ['coc-grammarly']
+	" pyright
+	let g:coc_global_extensions += ['coc-pyright']
+	" javascript/typescript
+	let g:coc_global_extensions += ['coc-eslint', 'coc-tsserver']
+
+
+
 	" comment/uncomment with proper escaping
 	Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
-
-	" call function to plug correct settings for YCM
-	call g:PlugYcm()
 
 	if has('python3')
 		" snippet manager

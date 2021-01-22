@@ -1,3 +1,4 @@
+" vim: tabstop=4 shiftwidth=4 noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>

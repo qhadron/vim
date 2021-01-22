@@ -1,3 +1,4 @@
+" vim: tabstop=4 shiftwidth=4 noexpandtab
 " source all the component vimrcs
 
 " Basic configs

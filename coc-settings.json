@@ -1,0 +1,28 @@
+{
+    "suggest.timeout": 5000,
+    "list.normalMappings": {
+        "<C-c>": "do:exit"
+    },
+    "list.insertMappings": {
+        "<C-c>": "do:exit"
+    },
+    "coc.preferences.jumpCommand": "drop",
+    "coc.preferences.formatOnType": true,
+
+    // coc-ultisnips configuration
+    "coc.source.ultisnips.priority": 101,
+    "coc.source.ultisnips.disableSyntaxes": ["string", "comment"],
+
+    // coc-diagnostic configuration
+    "diagnostic-languageserver.mergeConfig": true, // use default configured linters
+    "diagnostic-languageserver.debug": false, // disable debugging
+    // linters: see https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
+    "diagnostic-languageserver.filetypes": {
+        "python": [ "pylint" ]
+    },
+    // formatters: see https://github.com/iamcco/diagnostic-languageserver/wiki/Formatters
+    "diagnostic-languageserver.formatFiletypes": {
+        // use pyright instead
+        // "python": [ "autopep8", "isort", "docformatter" ]
+    }
+}
