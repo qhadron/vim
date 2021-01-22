@@ -15,12 +15,14 @@
 
     // coc-diagnostic configuration
     "diagnostic-languageserver.mergeConfig": true, // use default configured linters
+    "diagnostic-languageserver.debug": false, // disable debugging
     // linters: see https://github.com/iamcco/diagnostic-languageserver/wiki/Linters
     "diagnostic-languageserver.filetypes": {
         "python": [ "pylint" ]
     },
     // formatters: see https://github.com/iamcco/diagnostic-languageserver/wiki/Formatters
     "diagnostic-languageserver.formatFiletypes": {
-        "python": [ "autopep8", "isort", "docformatter" ]
+        // use pyright instead
+        // "python": [ "autopep8", "isort", "docformatter" ]
     }
 }
