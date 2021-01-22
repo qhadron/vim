@@ -6,6 +6,8 @@
     "list.insertMappings": {
         "<C-c>": "do:exit"
     },
+    "list.nextKeymap": "<C-n>",
+    "list.previousKeymap": "<C-p>",
     "coc.preferences.jumpCommand": "drop",
     "coc.preferences.formatOnType": true,
 
