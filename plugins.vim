@@ -197,8 +197,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	let g:coc_global_extensions += ['coc-diagnostic']
 	" grammarly suggestions
 	let g:coc_global_extensions += ['coc-grammarly']
-	" python
-	let g:coc_global_extensions += ['coc-jedi']
+	" pyright
+	let g:coc_global_extensions += ['coc-pyright']
 
 
 
