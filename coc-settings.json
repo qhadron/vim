@@ -7,6 +7,7 @@
         "<C-c>": "do:exit"
     },
     "coc.preferences.jumpCommand": "drop",
+    "coc.preferences.formatOnType": true,
 
     // coc-ultisnips configuration
     "coc.source.ultisnips.priority": 101,
