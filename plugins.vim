@@ -199,6 +199,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	let g:coc_global_extensions += ['coc-grammarly']
 	" pyright
 	let g:coc_global_extensions += ['coc-pyright']
+	" javascript/typescript
+	let g:coc_global_extensions += ['coc-eslint', 'coc-tsserver']
 
 
 
