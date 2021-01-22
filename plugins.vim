@@ -180,7 +180,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 		autocmd!
 		autocmd InsertEnter * ++once call plug#load('coc.nvim')
 	augroup END
-	command! COC call plug#load('coc.nvim') | CocEnable
+	command! COC call plug#load('coc.nvim') | doautocmd User coc.nvim | CocEnable
 
 
 	" coc extensions
