@@ -2,8 +2,6 @@
 """"""""""""""""""""""""""""""
 " => global stuff
 """"""""""""""""""""""""""""""
-let s:ag_command = 'ag --vimgrep --smart-case'
-
 " function to get the sid
 function! s:sid()
 	return maparg('<SID>', 'n')
@@ -228,7 +226,9 @@ nmap <silent> <leader>gp <Plug>(GitGutterPreviewHunk)
 " enable highlighting by default
 let g:gitgutter_highlight_lines = 1
 " use ag instead of grep
-if executable('ag')
+if executable('rg')
+	let g:gitgutter_grep = 'rg'
+elseif executable('ag')
 	let g:gitgutter_grep = 'ag'
 endif
 " set update time to make changes realtime
@@ -274,10 +274,10 @@ function! s:on_coc_load()
 
   " GoTo code navigation.
   nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> gy :<C-u>CocCommand fzf-preview.CocTypeDefinitions<cr>
+  nmap <silent> gi :<C-u>CocCommand fzf-preview.CocImplementations
+  nmap <silent> gr :<C-u>CocCommand fzf-preview.CocReferences<cr>
+
 
   " Use K to show documentation in preview window.
   nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -353,15 +353,15 @@ function! s:on_coc_load()
 
   " Mappings for CoCList
   " Show all diagnostics.
-  nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+  nnoremap <silent><nowait> <space>d  :<C-u>CocCommand fzf-preview.diagnostics<cr>
   " Manage extensions.
   nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
   " Show commands.
   nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
   " Find symbol of current document.
   nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-  " Search workspace symbols.
-  nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+  " Open sources
+  nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
   " Do default action for next item.
   nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
   " Do default action for previous item.
@@ -370,75 +370,26 @@ function! s:on_coc_load()
   nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
   " Marketplace
   nnoremap <silent><nowait> <space>m  :<C-u>CocList marketplace<CR>
+  " Coc lists
+  nnoremap <silent><nowait> <space>l  :<C-u>CocList lists<CR>
 endfunction
 
 """"""""""""""""""""""""""""""
 " => fzf
 """"""""""""""""""""""""""""""
 " change fzf default command to do better searching
-let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g ""'
+if executable('rg')
+	let $FZF_DEFAULT_COMMAND = 'rg --files .'
+elseif executable('ag')
+	let $FZF_DEFAULT_COMMAND = 'ag --vimgrep -g ""'
+endif
+""""""""""""""""""""""""""""""
+
+" => goyo
+""""""""""""""""""""""""""""""
 
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 0
-
-" set fzf layout (and open fzf in terminal window for the mappings)
-let g:fzf_layout = {'window': 'bot'.float2nr(&lines * 0.3).'new' }
-
-function! s:configure_fzf_window()
-	" decrease delay to close fzf windows after pressing <Esc>
-	setlocal ttimeoutlen=10
-endfunction
-
-augroup s:custom_fzf_configs
-	autocmd!
-	autocmd Filetype fzf call s:configure_fzf_window()
-augroup END
-
-" search for regex (grep)
-nnoremap <c-g> :Ag<space>
-
-" Find files
-nnoremap <silent> <leader>ff :Files<CR>
-
-" Find all files (change the ag command to not ignore .gitignore etc)
-function! s:find_all_files(...)
-	let backup=$FZF_DEFAULT_COMMAND
-	" search everything (-u) but ignore .git directory
-	let $FZF_DEFAULT_COMMAND = s:ag_command . ' -g "" -u --ignore .git'
-	call call('fzf#vim#files', a:000)
-	let $FZF_DEFAULT_COMMAND = backup
-endfunction
-command! -bang -nargs=? -complete=dir AllFiles call s:find_all_files(<q-args>, <bang>0)
-nnoremap <silent> <leader>fF :AllFiles<cr>
-
-" source fzf cycle
-source $VIM_PREFIX/extras/fzf_cycle.vim
-
-" remember fzf mode or not when cycling
-let g:fzf_cycle_remember_mode = 0
-
-" override fzf cycle commands
-let g:fzf_cycle_commands += [function('s:find_all_files')]
-
-" bind fzf cycle
-nnoremap <silent> <c-f> :FZFCycle<CR>
-
-" Find buffers
-nnoremap <silent> <leader>fb :Buffers<CR>
-" Find history (open bufferes and most recently used (v:oldfiles))
-nnoremap <silent> <leader>fh :History<CR>
-" Find commits
-nnoremap <silent> <leader>fg :Commits<CR>
-" Find commands
-nnoremap <silent> <leader>fc :Commands<CR>
-" Find (current buffer) lines
-nnoremap <silent> <leader>fl :BLines<CR>
-" Find global lines
-nnoremap <silent> <leader>fL :Lines<CR>
-" Find tags
-nnoremap <silent> <leader>ft :Filetypes<CR>
-" Find filetypes
-nnoremap <silent> <leader>fT :Filetypes<CR>
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -457,7 +408,11 @@ endfunction
 
 inoremap <expr> <c-x><c-k> <sid>complete_word()
 imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+if executable('rg')
+	imap <c-x><c-j> <plug>(fzf-complete-file-rg)
+elseif executable('ag')
+	imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+endif
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " use fzf to complete ultisnips snippets
@@ -482,6 +437,31 @@ inoremap <expr> <c-x>s fzf#vim#complete(
 			\  'options': '--delimiter "'.g:snippet_key_value_separator.'" --nth 1',
 			\ }
 			\ )
+
+""""""""""""""""""""""""""""""
+" => fzf-preview.vim
+""""""""""""""""""""""""""""""
+" fzf mappings
+
+nnoremap <silent> <c-f> <nop>
+nnoremap <silent> <c-f><c-f>       :<C-u>FzfPreviewBuffersRpc<CR>
+nnoremap <silent> <c-f><space>     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
+nnoremap <silent> <c-f>f           :<C-u>FzfPreviewLines<CR>
+nnoremap <silent> <c-f>F           :<C-u>FzfPreviewDirectoryFilesRpc<CR>
+nnoremap <silent> <c-f>gs          :<C-u>FzfPreviewGitStatusRpc<CR>
+nnoremap <silent> <c-f>ga          :<C-u>FzfPreviewGitActionsRpc<CR>
+nnoremap <silent> <c-f>b           :<C-u>FzfPreviewAllBuffersRpc<CR>
+nnoremap <silent> <c-f><C-o>       :<C-u>FzfPreviewJumpsRpc<CR>
+nnoremap <silent> <c-f>d           :<C-u>FzfPreviewChangesRpc<CR>
+nnoremap <silent> <c-f>/           :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> <c-f>*           :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          <c-g>            :<C-u>FzfPreviewProjectGrepRpc<Space>
+xnoremap          <c-g>            "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> <c-f>l           :<C-u>FzfPreviewLocationListRpc<CR>
+nnoremap <silent> <c-f>L           :<C-u>FzfPreviewBufferLines<CR>
+
+" fzf command default options
+let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window': ':wrap:hidden' }
 
 """"""""""""""""""""""""""""""
 " => goyo

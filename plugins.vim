@@ -34,6 +34,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 				\ }
 	" vim configs (provides Ack functionality too)
 	Plug 'junegunn/fzf.vim'
+	" open fzf in preview windows
+	Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
 
 	" buffer manager
 	Plug 'jlanzarotta/bufexplorer', { 'on': ['BufExplorer'] }
@@ -203,6 +205,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	let g:coc_global_extensions += ['coc-eslint', 'coc-tsserver']
 	" calculator for numerical expressions
 	let g:coc_global_extensions += ['coc-calc']
+	" fzf preview also installed here for coc specific stuff
+	" most of the time the regular plugin is used
+	let g:coc_global_extensions += ['coc-fzf-preview']
 
 
 
