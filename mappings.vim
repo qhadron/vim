@@ -54,6 +54,15 @@ map <leader>pp :setlocal paste!<cr>
 " Write the current buffer
 nmap <silent> <leader>w :w<cr>
 
+" copy current filename
+if has('win32')
+  nmap ,cf :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+  nmap ,cF :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+else
+  nmap ,cf :let @*=expand("%")<CR>
+  nmap ,cF :let @*=expand("%:p")<CR>
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " edit vimrc
 map <leader>e :e! $VIM_PREFIX/main.vim<cr>
