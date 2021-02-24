@@ -353,7 +353,7 @@ function! s:on_coc_load()
 
   " Mappings for CoCList
   " Show all diagnostics.
-  nnoremap <silent><nowait> <space>d  :<C-u>CocCommand fzf-preview.diagnostics<cr>
+  nnoremap <silent><nowait> <space>d  :<C-u>CocCommand fzf-preview.CocDiagnostics<cr>
   " Manage extensions.
   nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
   " Show commands.
@@ -446,8 +446,8 @@ inoremap <expr> <c-x>s fzf#vim#complete(
 nnoremap <silent> <c-f> <nop>
 nnoremap <silent> <c-f><c-f>       :<C-u>FzfPreviewBuffersRpc<CR>
 nnoremap <silent> <c-f><space>     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
-nnoremap <silent> <c-f>f           :<C-u>FzfPreviewLines<CR>
-nnoremap <silent> <c-f>F           :<C-u>FzfPreviewDirectoryFilesRpc<CR>
+nnoremap <silent> <c-f>f           :<C-u>FzfPreviewDirectoryFilesRpc<CR>
+nnoremap <silent> <c-f>F           :<C-u>FzfPreviewLines<CR>
 nnoremap <silent> <c-f>gs          :<C-u>FzfPreviewGitStatusRpc<CR>
 nnoremap <silent> <c-f>ga          :<C-u>FzfPreviewGitActionsRpc<CR>
 nnoremap <silent> <c-f>b           :<C-u>FzfPreviewAllBuffersRpc<CR>
