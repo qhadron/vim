@@ -766,6 +766,7 @@ augroup END
 let g:workspace_session_directory = $VIM_PREFIX."/temp_dirs/sessions/"
 let g:workspace_session_disable_on_args = 1
 let g:workspace_persist_undo_history = 0
+let g:workspace_autosave = 0
 
 """"""""""""""""""""""""""""""
 " => FastFold
