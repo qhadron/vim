@@ -203,6 +203,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	let g:coc_global_extensions += ['coc-pyright']
 	" javascript/typescript
 	let g:coc_global_extensions += ['coc-eslint', 'coc-tsserver']
+	" react
+	let g:coc_global_extensions += ['coc-react-refactor', 'coc-cssmodules']
+
 	" calculator for numerical expressions
 	let g:coc_global_extensions += ['coc-calc']
 	" fzf preview also installed here for coc specific stuff
