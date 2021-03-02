@@ -148,6 +148,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" plugin for html/css editing (it handles its own filetypes)
 	Plug 'mattn/emmet-vim'
 
+	" highlight css colors
+	Plug 'ap/vim-css-color'
+
 	" better javascript highlighting
 	Plug 'yuezk/vim-js'
 
