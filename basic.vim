@@ -19,6 +19,13 @@ try
 catch
 endtry
 
+" enable terminal colors
+try
+	set t_Co=256
+	set termguicolors
+catch
+endtry
+
 " Enable command-line tab completion
 set wildmenu
 set wildmode=list:longest,full
