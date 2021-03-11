@@ -7,6 +7,11 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	Plug 'junegunn/vim-plug'
 
 	""""""""""""""""""""""""""""""
+	" => Vim helpers
+	""""""""""""""""""""""""""""""
+	Plug 'skywind3000/asyncrun.vim'
+
+	""""""""""""""""""""""""""""""
 	" => Visual
 	""""""""""""""""""""""""""""""
 
