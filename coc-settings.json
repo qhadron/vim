@@ -26,5 +26,9 @@
     "diagnostic-languageserver.formatFiletypes": {
         // use pyright instead
         // "python": [ "autopep8", "isort", "docformatter" ]
-    }
+    },
+
+    // coc-source plugin
+    "coc.source.emoji.filetypes": [ "markdown", "text" ],
+    "coc.source.word.filetypes": [ "markdown", "text", "tex" ]
 }
