@@ -124,7 +124,7 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
 
 	" markdown support
-	Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+	Plug 'plasticboy/vim-markdown', { 'for': ['markdown', 'rmd'] }
 	" markdown preview
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 	" paste images for markdown
