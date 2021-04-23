@@ -299,8 +299,8 @@ function! s:on_coc_load()
   nmap <F2> <Plug>(coc-rename)
 
   " Formatting selected code.
-  xmap <leader>F  <Plug>(coc-format-selected)
-  nmap <leader>F  <Plug>(coc-format-selected)
+  xmap <leader>f  <Plug>(coc-format-selected)
+  nmap <leader>f  <Plug>(coc-format-selected)
 
   augroup mygroup
     autocmd!
