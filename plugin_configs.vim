@@ -455,10 +455,16 @@ nnoremap <silent> <c-f><C-o>       :<C-u>FzfPreviewJumpsRpc<CR>
 nnoremap <silent> <c-f>d           :<C-u>FzfPreviewChangesRpc<CR>
 nnoremap <silent> <c-f>/           :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
 nnoremap <silent> <c-f>*           :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap          <c-g>            :<C-u>FzfPreviewProjectGrepRpc<Space>
-xnoremap          <c-g>            "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 nnoremap <silent> <c-f>l           :<C-u>FzfPreviewBufferLines<CR>
 nnoremap <silent> <c-f>L           :<C-u>FzfPreviewLocationListRpc<CR>
+
+nnoremap          <c-g>            :<C-u>FzfPreviewProjectGrepRpc<Space>
+xnoremap          <c-g>            "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+" replace the old <c-g> functionality
+" -> show filename
+nnoremap          <f1>             <c-g>
+" -> enter select mode
+xnoremap          <c-s>            <c-g>
 
 " fzf command default options
 let g:fzf_preview_default_fzf_options = { '--reverse': v:true, '--preview-window': ':wrap:hidden' }
