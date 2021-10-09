@@ -105,9 +105,6 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" text object: comments
 	Plug 'glts/vim-textobj-comment'
 
-	" automatically detect indentation
-	Plug 'tpope/vim-sleuth'
-
 	" expand single line of code / contract multiple lines of code
 	Plug 'andrewradev/splitjoin.vim'
 
@@ -123,16 +120,13 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
 	" => syntax/filetype support
 	""""""""""""""""""""""""""""""
+	" most filetypes
+	Plug 'sheerun/vim-polyglot'
 
-	" markdown support
-	Plug 'plasticboy/vim-markdown', { 'for': ['markdown', 'rmd'] }
 	" markdown preview
 	Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 	" paste images for markdown
 	Plug 'ferrine/md-img-paste.vim', { 'as': 'md-img-paste', 'for': 'markdown' }
-
-	" mustache/handlebars support
-	Plug 'mustache/vim-mustache-handlebars', { 'for': 'mustache' }
 
 	" LaTeX support
 	if executable('latexmk')
@@ -143,29 +137,14 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" python auto formatting
 	Plug 'tell-k/vim-autopep8', { 'for': 'python' }
-	" Improved python highlighting
-	Plug 'vim-python/python-syntax', { 'for': 'python' }
 	" python folding
 	Plug 'tmhedberg/SimpylFold'
-
-	" nginx configurations
-	Plug 'chr4/nginx.vim', {'for': 'nginx'}
 
 	" plugin for html/css editing (it handles its own filetypes)
 	Plug 'mattn/emmet-vim'
 
 	" highlight css colors
 	Plug 'ap/vim-css-color'
-
-	" better javascript highlighting
-	Plug 'yuezk/vim-js'
-
-	" typescript support
-	Plug 'HerringtonDarkholme/yats.vim'
-
-	" jsx/tsx highlighting and extras
-	Plug 'maxmellon/vim-jsx-pretty'
-
 	""""""""""""""""""""""""""""""
 	" => Git
 	""""""""""""""""""""""""""""""
