@@ -445,8 +445,8 @@ inoremap <expr> <c-x>s fzf#vim#complete(
 
 nnoremap <silent> <c-f> <nop>
 nnoremap <silent> <c-f><c-f>       :<C-u>FzfPreviewBuffersRpc<CR>
-nnoremap <silent> <c-f><space>     :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
-nnoremap <silent> <c-f>f           :<C-u>FzfPreviewDirectoryFilesRpc<CR>
+nnoremap <silent> <c-f><space>     :<C-u>FzfPreviewDirectoryFilesRpc<CR>
+nnoremap <silent> <c-f>f           :<C-u>FzfPreviewFromResourcesRpc project_mru project git<CR>
 nnoremap <silent> <c-f>F           :<C-u>FzfPreviewLines<CR>
 nnoremap <silent> <c-f>gs          :<C-u>FzfPreviewGitStatusRpc<CR>
 nnoremap <silent> <c-f>ga          :<C-u>FzfPreviewGitActionsRpc<CR>
