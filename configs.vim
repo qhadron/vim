@@ -33,8 +33,7 @@ set softtabstop=0
 
 " Use English for spellchecking, but don't spellcheck by default (speed)
 if version >= 700
-	set spl=en_ca spell
-	set nospell
+	set spelllang=en_ca
 endif
 
 " set location of dictionary

@@ -166,8 +166,7 @@ hi SpellBad gui=undercurl guisp=Red term=undercurl cterm=undercurl
 
 " Use English for spellchecking, but don't spellcheck by default (speed)
 if version >= 700
-   set spl=en spell
-   set nospell
+   set spl=en nospell
 endif
 
 " autoread file changes outside of vim
