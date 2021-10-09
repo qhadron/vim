@@ -190,6 +190,8 @@ function! TabFilenames(tabnr)
 			else
 				let name = simplify(name)
 			endif
+		elseif type == 'terminal'
+			let name='['.term_gettitle(buffer).']'
 		else
 			let name='['.type.']'
 		endif
@@ -204,7 +206,7 @@ function! TabFilenames(tabnr)
 		\ / tabpagenr('$')
 		\ ))-3 " -3 for the dots
 	if len(result)>tab_size
-		let display_len=max([tab_size, len(names[0])])
+		let display_len=min([tab_size, len(names[0])])
 		let result = result[:display_len].'...'
 	endif
 	return result
