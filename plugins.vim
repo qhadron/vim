@@ -185,8 +185,6 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	let g:coc_global_extensions += ['coc-vimlsp']
 	" diagnostic server: linting & formatting support
 	let g:coc_global_extensions += ['coc-diagnostic']
-	" grammarly suggestions
-	let g:coc_global_extensions += ['coc-grammarly']
 	" pyright
 	let g:coc_global_extensions += ['coc-pyright']
 	" javascript/typescript
