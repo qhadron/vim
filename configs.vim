@@ -4,8 +4,12 @@ nmap ; :
 
 " Colorscheme
 set background=dark
-colorscheme peaksea
-let g:colors_name="peaksea"
+let g:lightline['colorscheme']='onedark'
+colorscheme onedark
+highlight SpellBad gui=undercurl cterm=undercurl
+highlight SpellCap gui=undercurl cterm=undercurl
+highlight SpellLocal gui=undercurl cterm=undercurl
+highlight SpellRare gui=undercurl cterm=undercurl
 
 " Set relative line numbers with current line displayed instead of 0
 set rnu

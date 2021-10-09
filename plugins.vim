@@ -16,7 +16,8 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	""""""""""""""""""""""""""""""
 
 	" colours
-	Plug 'flazz/vim-colorschemes'
+	" cool dark theme
+	Plug 'joshdick/onedark.vim'
 
 	" status line
 	Plug 'itchyny/lightline.vim'

@@ -160,9 +160,8 @@ set showcmd
 set spellfile=$VIM_PREFIX/spell/words.utf-8.add
 
 " spell underline
-let &t_Cs = "\e[4:3m\e[58:5:1m"
-let &t_Ce = "\e[4:0m\e[59m"
-hi SpellBad gui=undercurl guisp=Red term=undercurl cterm=undercurl
+let &t_Cs = "\e[4:3m"
+let &t_Ce = "\e[4:0m"
 
 " Use English for spellchecking, but don't spellcheck by default (speed)
 if version >= 700
