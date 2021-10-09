@@ -57,9 +57,6 @@ nnoremap <leader>Q :qa<cr>
 " Redraw
 map <F5> :redraw!<cr>
 
-" search current Word in tags
-nnoremap <c-t> "ayiW:Tags<space><c-r>a
-
 " visual instead of audio bell
 set visualbell
 
@@ -86,6 +83,8 @@ augroup my_au_group
 	" no numbering for terminal
 	autocmd TerminalOpen set nonumber nornu
 
+	" reload vimrc on (intentional) write
+	autocmd BufWritePost configs.vim if expand('%') ==# $VIM_PREFIX . '/configs.vim' | source $VIM_PREFIX/configs.vim | endif
 augroup END
 
 " functions to profile vim
@@ -104,5 +103,14 @@ endfunction
 command ProfileStart call s:profile_start()
 command ProfileEnd call s:profile_end()
 
-" reload vimrc on (intentional) write
-autocmd BufWritePost configs.vim if expand('%') ==# $VIM_PREFIX . '/configs.vim' | source $VIM_PREFIX/configs.vim | endif
+" enable pretty colors (requires 256-bit color support)
+if exists('+termguicolors')
+	if !empty($TMUX)
+		autocmd VimEnter * ++once redraw | echom "tmux detected"
+		let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+		let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+	endif
+	set termguicolors
+endif
+
+set colorcolumn=80
