@@ -1,6 +1,9 @@
 " vim: tabstop=4 shiftwidth=4 noexpandtab
 " source all the component vimrcs
 
+" disable vi-compatibility, just to be sure
+set nocompatible
+
 " Basic configs
 source $VIM_PREFIX/basic.vim
 
