@@ -414,11 +414,7 @@ endfunction
 
 inoremap <expr> <c-x><c-k> <sid>complete_word()
 imap <c-x><c-f> <plug>(fzf-complete-path)
-if executable('rg')
-	imap <c-x><c-j> <plug>(fzf-complete-file-rg)
-elseif executable('ag')
-	imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-endif
+imap <c-x><c-j> <plug>(fzf-complete-file)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " use fzf to complete ultisnips snippets
