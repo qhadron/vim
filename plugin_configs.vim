@@ -151,7 +151,6 @@ let g:lightline#coc#indicator_ok='✔️ '
 " register coc components
 call lightline#coc#register()
 
-
 " show filename
 function! LightlineFilename()
 	let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
@@ -237,7 +236,7 @@ endif
 set updatetime=100
 
 """"""""""""""""""""""""""""""
-" => coc
+" => coc.nvim
 """"""""""""""""""""""""""""""
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -245,12 +244,8 @@ set shortmess+=c
 " enable semantic highlighting
 let g:coc_default_semantic_highlight_groups = 1
 
-" load mappings when coc is loaded
-augroup coc_loaded
-	autocmd!
-	autocmd User coc.nvim call s:on_coc_load()
-augroup end
-
+autocmd User CocNvimInit call s:on_coc_load()
+" this is needed so that coc settings overwrite any other plugin's settings
 function! s:on_coc_load()
 	" Use tab for trigger completion with characters ahead and navigate.
 	" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -275,8 +270,8 @@ function! s:on_coc_load()
 
 	" Use `[g` and `]g` to navigate diagnostics
 	" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-	nmap <silent> [g <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]g <Plug>(coc-diagnostic-next)
+	nmap <silent> [d <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 	" GoTo code navigation.
 	nmap <silent> gd <Plug>(coc-definition)
@@ -308,7 +303,7 @@ function! s:on_coc_load()
 	xmap <leader>f  <Plug>(coc-format-selected)
 	nmap <leader>f  <Plug>(coc-format-selected)
 
-	augroup mygroup
+	augroup coc_autos
 		autocmd!
 		" Setup formatexpr specified filetype(s).
 		autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')

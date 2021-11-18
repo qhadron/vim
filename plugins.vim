@@ -167,18 +167,9 @@ Plug 'airblade/vim-gitgutter'
 """"""""""""""""""""""""""""""
 
 " completion plugin: conquer of completion
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': []}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " lightline plugin
 Plug 'josa42/vim-lightline-coc'
-
-" loading on insert is necessary since some mappings (i.e. gd) gets
-" overwritten by other plugins (i.e. vim-slash)
-augroup load_coc
-	autocmd!
-	autocmd InsertEnter * ++once call plug#load('coc.nvim')
-augroup END
-command! COC call plug#load('coc.nvim') | doautocmd User coc.nvim | CocEnable
-
 
 " coc extensions
 let g:coc_global_extensions = []
@@ -207,15 +198,9 @@ let g:coc_global_extensions += ['coc-calc']
 " most of the time the regular plugin is used
 let g:coc_global_extensions += ['coc-fzf-preview']
 
-" c/c++ and semantic hilighting
+" c/c++ and semantic highlighting
 let g:coc_global_extensions += ['coc-clangd']
-Plug 'jackguo380/vim-lsp-cxx-highlight', { 'on': [] }
-
-augroup load_coc_plugins
-	autocmd!
-	autocmd User coc.nvim ++once call plug#load('vim-lsp-cxx-highlight')
-augroup END
-
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " comment/uncomment with proper escaping
 Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
