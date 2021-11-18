@@ -791,3 +791,12 @@ let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 """"""""""""""""""""""""""""""
 " preview docstring in fold text
 let g:SimpylFold_docstring_preview = 1
+
+
+""""""""""""""""""""""""""""""
+" => vim-polyglot
+""""""""""""""""""""""""""""""
+" add disabled filetypes here
+" add <ft>.plugin to disable filetype highlighting without disabling detection
+let g:polyglot_disabled = []
+call plug#load('vim-polyglot')

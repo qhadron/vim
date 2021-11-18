@@ -121,7 +121,7 @@ Plug 'Konfekt/FastFold'
 " => syntax/filetype support
 """"""""""""""""""""""""""""""
 " most filetypes
-Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot', { 'on': [] } " load after config
 
 " markdown preview
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
