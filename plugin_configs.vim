@@ -98,48 +98,48 @@ let s:lightline_tab_min_padding=20
 let s:lightline_tab_active_page_extra=0
 
 let g:lightline = {
-	\ 'colorscheme': 'powerline',
-	\ 'active': {
-	\   'left': [ [ 'mode', 'paste' ],
-	\             [ 'readonly', 'filename', 'fugitive' ],
-	\             [ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]],
-	\   'right': [ [ 'lineinfo' ],
-	\              [ 'percent' ],
-	\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'] ]
-	\ },
-	\ 'inactive': {
-	\   'left': [ [ 'readonly', 'filename', 'fugitive' ] ],
-	\   'right': [ [ 'lineinfo' ],
-	\              [ 'percent' ],
-	\              [ 'fileencoding', 'filetype' ] ]
-	\ },
-	\ 'tab': {
-	\   'active': [  'tabnum', 'tab_filenames', 'modified'  ],
-	\   'inactive': [  'tabnum', 'tab_filenames', 'modified' ],
-	\ },
-	\ 'tab_component_function': {
-	\   'tab_filenames': 'TabFilenames',
-	\ },
-	\ 'component': {
-	\   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-	\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
-	\   'sleuth': '%{SleuthIndicator()}'
-	\ },
-	\ 'component_visible_condition': {
-	\   'readonly': '(&filetype!="help"&& &readonly)',
-	\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-	\ },
-	\ 'component_function': {
-	\   'filename': 'LightlineFilename',
-	\   'cocstatus': 'coc#status'
-	\ },
-	\ 'component_expand': {
-	\ },
-	\ 'component_type': {
-	\ },
-	\ 'separator': { 'left': '', 'right': '' },
-	\ 'subseparator': { 'left': '|', 'right': '|' }
-	\ }
+			\ 'colorscheme': 'powerline',
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ],
+			\             [ 'readonly', 'filename', 'fugitive' ],
+			\             [ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]],
+			\   'right': [ [ 'lineinfo' ],
+			\              [ 'percent' ],
+			\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'] ]
+			\ },
+			\ 'inactive': {
+			\   'left': [ [ 'readonly', 'filename', 'fugitive' ] ],
+			\   'right': [ [ 'lineinfo' ],
+			\              [ 'percent' ],
+			\              [ 'fileencoding', 'filetype' ] ]
+			\ },
+			\ 'tab': {
+			\   'active': [  'tabnum', 'tab_filenames', 'modified'  ],
+			\   'inactive': [  'tabnum', 'tab_filenames', 'modified' ],
+			\ },
+			\ 'tab_component_function': {
+			\   'tab_filenames': 'TabFilenames',
+			\ },
+			\ 'component': {
+			\   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
+			\   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}',
+			\   'sleuth': '%{SleuthIndicator()}'
+			\ },
+			\ 'component_visible_condition': {
+			\   'readonly': '(&filetype!="help"&& &readonly)',
+			\   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+			\ },
+			\ 'component_function': {
+			\   'filename': 'LightlineFilename',
+			\   'cocstatus': 'coc#status'
+			\ },
+			\ 'component_expand': {
+			\ },
+			\ 'component_type': {
+			\ },
+			\ 'separator': { 'left': '', 'right': '' },
+			\ 'subseparator': { 'left': '|', 'right': '|' }
+			\ }
 
 " change symbols
 let g:lightline#coc#indicator_warnings='⚠️ '
@@ -201,10 +201,10 @@ function! TabFilenames(tabnr)
 	" trim to a shorter length
 	let result=join(names, ',')
 	let tab_size = float2nr(round(
-		\ ( &columns - s:lightline_tab_min_padding +
-		\   ((tabpagenr() == a:tabnr ? 1.0 : -1.0) * s:lightline_tab_active_page_extra))
-		\ / tabpagenr('$')
-		\ ))-3 " -3 for the dots
+				\ ( &columns - s:lightline_tab_min_padding +
+				\   ((tabpagenr() == a:tabnr ? 1.0 : -1.0) * s:lightline_tab_active_page_extra))
+				\ / tabpagenr('$')
+				\ ))-3 " -3 for the dots
 	if len(result)>tab_size
 		let display_len=min([tab_size, len(names[0])])
 		let result = result[:display_len].'...'
@@ -252,132 +252,132 @@ augroup coc_loaded
 augroup end
 
 function! s:on_coc_load()
-  " Use tab for trigger completion with characters ahead and navigate.
-  " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-  " other plugin before putting this into your config.
-  inoremap <silent><expr> <TAB>
-	\ pumvisible() ? "\<C-n>" :
-	\ <SID>check_back_space() ? "\<TAB>" :
-	\ coc#refresh()
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+	" Use tab for trigger completion with characters ahead and navigate.
+	" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+	" other plugin before putting this into your config.
+	inoremap <silent><expr> <TAB>
+				\ pumvisible() ? "\<C-n>" :
+				\ <SID>check_back_space() ? "\<TAB>" :
+				\ coc#refresh()
+	inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-  function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-  endfunction
+	function! s:check_back_space() abort
+		let col = col('.') - 1
+		return !col || getline('.')[col - 1]  =~# '\s'
+	endfunction
 
-  " Use <c-space> to trigger completion.
-  if has('nvim')
-    inoremap <silent><expr> <c-space> coc#refresh()
-  else
-    inoremap <silent><expr> <c-@> coc#refresh()
-  endif
+	" Use <c-space> to trigger completion.
+	if has('nvim')
+		inoremap <silent><expr> <c-space> coc#refresh()
+	else
+		inoremap <silent><expr> <c-@> coc#refresh()
+	endif
 
-  " Use `[g` and `]g` to navigate diagnostics
-  " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-  nmap <silent> [g <Plug>(coc-diagnostic-prev)
-  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+	" Use `[g` and `]g` to navigate diagnostics
+	" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+	nmap <silent> [g <Plug>(coc-diagnostic-prev)
+	nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-  " GoTo code navigation.
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy :<C-u>CocCommand fzf-preview.CocTypeDefinitions<cr>
-  nmap <silent> gi :<C-u>CocCommand fzf-preview.CocImplementations
-  nmap <silent> gr :<C-u>CocCommand fzf-preview.CocReferences<cr>
-
-
-  " Use K to show documentation in preview window.
-  nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-  function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-      execute 'h '.expand('<cword>')
-    elseif (coc#rpc#ready())
-      call CocActionAsync('doHover')
-    else
-      execute '!' . &keywordprg . " " . expand('<cword>')
-    endif
-  endfunction
-
-  " Highlight the symbol and its references when holding the cursor.
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-
-  " Symbol renaming.
-  nmap <F2> <Plug>(coc-rename)
-
-  " Formatting selected code.
-  xmap <leader>f  <Plug>(coc-format-selected)
-  nmap <leader>f  <Plug>(coc-format-selected)
-
-  augroup mygroup
-    autocmd!
-    " Setup formatexpr specified filetype(s).
-    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-    " Update signature help on jump placeholder.
-    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-  augroup end
-
-  " Applying codeAction to the selected region.
-  " Example: `<leader>aap` for current paragraph
-  xmap <leader>a  <Plug>(coc-codeaction-selected)
-  nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-  " Remap keys for applying codeAction to the current buffer.
-  nmap <leader>ac  <Plug>(coc-codeaction)
-  " Apply AutoFix to problem on the current line.
-  nmap <leader>qf  <Plug>(coc-fix-current)
-
-  " Map function and class text objects
-  " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-  xmap if <Plug>(coc-funcobj-i)
-  omap if <Plug>(coc-funcobj-i)
-  xmap af <Plug>(coc-funcobj-a)
-  omap af <Plug>(coc-funcobj-a)
-  xmap ic <Plug>(coc-classobj-i)
-  omap ic <Plug>(coc-classobj-i)
-  xmap ac <Plug>(coc-classobj-a)
-  omap ac <Plug>(coc-classobj-a)
-
-  " Remap <C-d> and <C-u> for scroll float windows/popups.
-  if has('nvim-0.4.0') || has('patch-8.2.0750')
-    nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-    nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
-    inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
-    vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
-  endif
+	" GoTo code navigation.
+	nmap <silent> gd <Plug>(coc-definition)
+	nmap <silent> gy :<C-u>CocCommand fzf-preview.CocTypeDefinitions<cr>
+	nmap <silent> gi :<C-u>CocCommand fzf-preview.CocImplementations
+	nmap <silent> gr :<C-u>CocCommand fzf-preview.CocReferences<cr>
 
 
-  " Add `:Format` command to format current buffer.
-  command! -nargs=0 Format :call CocAction('format')
+	" Use K to show documentation in preview window.
+	nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-  " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+	function! s:show_documentation()
+		if (index(['vim','help'], &filetype) >= 0)
+			execute 'h '.expand('<cword>')
+		elseif (coc#rpc#ready())
+			call CocActionAsync('doHover')
+		else
+			execute '!' . &keywordprg . " " . expand('<cword>')
+		endif
+	endfunction
 
-  " Add `:OR` command for organize imports of the current buffer.
-  command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+	" Highlight the symbol and its references when holding the cursor.
+	autocmd CursorHold * silent call CocActionAsync('highlight')
 
-  " Mappings for CoCList
-  " Show all diagnostics.
-  nnoremap <silent><nowait> <space>d  :<C-u>CocCommand fzf-preview.CocDiagnostics<cr>
-  " Manage extensions.
-  nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-  " Show commands.
-  nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-  " Find symbol of current document.
-  nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-  " Open sources
-  nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
-  " Do default action for next item.
-  nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-  " Do default action for previous item.
-  nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-  " Resume latest coc list.
-  nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-  " Marketplace
-  nnoremap <silent><nowait> <space>m  :<C-u>CocList marketplace<CR>
-  " Coc lists
-  nnoremap <silent><nowait> <space>l  :<C-u>CocList lists<CR>
+	" Symbol renaming.
+	nmap <F2> <Plug>(coc-rename)
+
+	" Formatting selected code.
+	xmap <leader>f  <Plug>(coc-format-selected)
+	nmap <leader>f  <Plug>(coc-format-selected)
+
+	augroup mygroup
+		autocmd!
+		" Setup formatexpr specified filetype(s).
+		autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+		" Update signature help on jump placeholder.
+		autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+	augroup end
+
+	" Applying codeAction to the selected region.
+	" Example: `<leader>aap` for current paragraph
+	xmap <leader>a  <Plug>(coc-codeaction-selected)
+	nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+	" Remap keys for applying codeAction to the current buffer.
+	nmap <leader>ac  <Plug>(coc-codeaction)
+	" Apply AutoFix to problem on the current line.
+	nmap <leader>qf  <Plug>(coc-fix-current)
+
+	" Map function and class text objects
+	" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+	xmap if <Plug>(coc-funcobj-i)
+	omap if <Plug>(coc-funcobj-i)
+	xmap af <Plug>(coc-funcobj-a)
+	omap af <Plug>(coc-funcobj-a)
+	xmap ic <Plug>(coc-classobj-i)
+	omap ic <Plug>(coc-classobj-i)
+	xmap ac <Plug>(coc-classobj-a)
+	omap ac <Plug>(coc-classobj-a)
+
+	" Remap <C-d> and <C-u> for scroll float windows/popups.
+	if has('nvim-0.4.0') || has('patch-8.2.0750')
+		nnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+		nnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+		inoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+		inoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+		vnoremap <silent><nowait><expr> <C-d> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-d>"
+		vnoremap <silent><nowait><expr> <C-u> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-u>"
+	endif
+
+
+	" Add `:Format` command to format current buffer.
+	command! -nargs=0 Format :call CocAction('format')
+
+	" Add `:Fold` command to fold current buffer.
+	command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+	" Add `:OR` command for organize imports of the current buffer.
+	command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+	" Mappings for CoCList
+	" Show all diagnostics.
+	nnoremap <silent><nowait> <space>d  :<C-u>CocCommand fzf-preview.CocDiagnostics<cr>
+	" Manage extensions.
+	nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+	" Show commands.
+	nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+	" Find symbol of current document.
+	nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+	" Open sources
+	nnoremap <silent><nowait> <space>s  :<C-u>CocList sources<cr>
+	" Do default action for next item.
+	nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+	" Do default action for previous item.
+	nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+	" Resume latest coc list.
+	nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+	" Marketplace
+	nnoremap <silent><nowait> <space>m  :<C-u>CocList marketplace<CR>
+	" Coc lists
+	nnoremap <silent><nowait> <space>l  :<C-u>CocList lists<CR>
 endfunction
 
 """"""""""""""""""""""""""""""
@@ -625,15 +625,15 @@ let g:vimtex_compiler_method = 'latexmk'
 let g:vimtex_compiler_build_dir = '.tex.build'
 
 let g:vimtex_compiler_latexmk = {
-	\ 'build_dir': g:vimtex_compiler_build_dir,
-	\ 'options' : [
-	\   '-pdf',
-	\   '-verbose',
-	\   '-file-line-error',
-	\   '-synctex=1',
-	\   '-interaction=nonstopmode',
-	\ ],
-	\}
+			\ 'build_dir': g:vimtex_compiler_build_dir,
+			\ 'options' : [
+			\   '-pdf',
+			\   '-verbose',
+			\   '-file-line-error',
+			\   '-synctex=1',
+			\   '-interaction=nonstopmode',
+			\ ],
+			\}
 
 augroup s:vimtex
 	autocmd!
@@ -725,13 +725,13 @@ let g:user_emmet_mode = 'a'
 let g:user_emmet_leader_key='<c-e>'
 " enable for additional languages
 let g:user_emmet_settings = {
-	\  'xml' : {
-	\    'extends' : 'html',
-	\  },
-	\  'markdown' : {
-	\    'extends' : 'html',
-	\  },
-	\}
+			\  'xml' : {
+			\    'extends' : 'html',
+			\  },
+			\  'markdown' : {
+			\    'extends' : 'html',
+			\  },
+			\}
 
 """"""""""""""""""""""""""""""
 " => markdown-preview.nvim

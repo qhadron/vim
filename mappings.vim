@@ -56,11 +56,11 @@ nmap <silent> <leader>w :w<cr>
 
 " copy current filename
 if has('win32')
-  nmap ,cf :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
-  nmap ,cF :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+	nmap ,cf :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+	nmap ,cF :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
 else
-  nmap ,cf :let @*=expand("%")<CR>
-  nmap ,cF :let @*=expand("%:p")<CR>
+	nmap ,cf :let @*=expand("%")<CR>
+	nmap ,cF :let @*=expand("%:p")<CR>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
