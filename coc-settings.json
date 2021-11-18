@@ -10,6 +10,8 @@
 	"list.previousKeymap": "<C-p>",
 	"coc.preferences.jumpCommand": "drop",
 	"coc.preferences.formatOnType": true,
+	"coc.preferences.extensionUpdateCheck": "daily",
+	"coc.preferences.silentAutoupdate": true,
 
 	// coc-ultisnips configuration
 	"coc.source.ultisnips.priority": 101,
@@ -28,3 +30,5 @@
 		// "python": [ "autopep8", "isort", "docformatter" ]
 	},
 }
+
+
