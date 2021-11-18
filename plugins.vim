@@ -145,6 +145,9 @@ call plug#begin($VIM_PREFIX . '/plugged')
 
 	" highlight css colors
 	Plug 'ap/vim-css-color'
+
+	" edit GPG encrypted files
+	Plug 'jamessan/vim-gnupg'
 	""""""""""""""""""""""""""""""
 	" => Git
 	""""""""""""""""""""""""""""""
