@@ -203,6 +203,14 @@ call plug#begin($VIM_PREFIX . '/plugged')
 	" most of the time the regular plugin is used
 	let g:coc_global_extensions += ['coc-fzf-preview']
 
+	" c/c++ and semantic hilighting
+	let g:coc_global_extensions += ['coc-clangd']
+	Plug 'jackguo380/vim-lsp-cxx-highlight', { 'on': [] }
+
+	augroup load_coc_plugins
+		autocmd!
+		autocmd User coc.nvim ++once call plug#load('vim-lsp-cxx-highlight')
+	augroup END
 
 
 	" comment/uncomment with proper escaping

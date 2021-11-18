@@ -242,9 +242,13 @@ set updatetime=100
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
+" enable semantic highlighting
+let g:coc_default_semantic_highlight_groups = 1
+
 " load mappings when coc is loaded
 augroup coc_loaded
-  autocmd! User coc.nvim call s:on_coc_load()
+	autocmd!
+	autocmd User coc.nvim call s:on_coc_load()
 augroup end
 
 function! s:on_coc_load()
