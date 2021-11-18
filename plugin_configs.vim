@@ -212,32 +212,11 @@ function! TabFilenames(tabnr)
 endfunction
 
 """"""""""""""""""""""""""""""
-" => git gutter
+" => coc.nvim
 """"""""""""""""""""""""""""""
-" disable by default
-let g:gitgutter_enabled=0
-" add binding to toggle for the buffer
-nnoremap <silent> <leader>gg :GitGutterToggle<cr>
-" add binding to stage a hunk
-nmap <silent> <leader>ga <Plug>(GitGutterStageHunk)
-" add binding to undo a hunk
-nmap <silent> <leader>gu <Plug>(GitGutterUndoHunk)
-" add binding to preview a hunk
-nmap <silent> <leader>gp <Plug>(GitGutterPreviewHunk)
-" enable highlighting by default
-let g:gitgutter_highlight_lines = 1
-" use ag instead of grep
-if executable('rg')
-	let g:gitgutter_grep = 'rg'
-elseif executable('ag')
-	let g:gitgutter_grep = 'ag'
-endif
 " set update time to make changes realtime
 set updatetime=100
 
-""""""""""""""""""""""""""""""
-" => coc.nvim
-""""""""""""""""""""""""""""""
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -268,7 +247,7 @@ function! s:on_coc_load()
 		inoremap <silent><expr> <c-@> coc#refresh()
 	endif
 
-	" Use `[g` and `]g` to navigate diagnostics
+	" Use `[d` and `]d` to navigate diagnostics
 	" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 	nmap <silent> [d <Plug>(coc-diagnostic-prev)
 	nmap <silent> ]d <Plug>(coc-diagnostic-next)
@@ -599,6 +578,8 @@ augroup END
 """"""""""""""""""""""""""""""
 " disable leader key mappings
 let g:tcomment_mapleader2=''
+" disable operator maps (conflicts with coc-git)
+let g:tcomment_opleader1=''
 
 
 """"""""""""""""""""""""""""""
@@ -787,7 +768,6 @@ let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 " preview docstring in fold text
 let g:SimpylFold_docstring_preview = 1
 
-
 """"""""""""""""""""""""""""""
 " => vim-polyglot
 """"""""""""""""""""""""""""""
@@ -795,3 +775,34 @@ let g:SimpylFold_docstring_preview = 1
 " add <ft>.plugin to disable filetype highlighting without disabling detection
 let g:polyglot_disabled = []
 call plug#load('vim-polyglot')
+
+""""""""""""""""""""""""""""""
+" => coc-git
+""""""""""""""""""""""""""""""
+" navigate chunks of current buffer
+nmap <silent> [g <Plug>(coc-git-prevchunk)
+nmap <silent> ]g <Plug>(coc-git-nextchunk)
+" navigate conflicts of current buffer
+nmap <silent> [c <Plug>(coc-git-prevconflict)
+nmap <silent> ]c <Plug>(coc-git-nextconflict)
+
+" create text object for git chunks
+omap <silent> ig <Plug>(coc-git-chunk-inner)
+xmap <silent> ig <Plug>(coc-git-chunk-inner)
+omap <silent> ag <Plug>(coc-git-chunk-outer)
+xmap <silent> ag <Plug>(coc-git-chunk-outer)
+
+" toggle gutters
+nmap <silent> ,gg :<c-u>CocCommand git.toggleGutters<cr>
+" undo chunk
+nmap <silent> ,gu :<c-u>CocCommand git.chunkUndo<cr>
+" stage chunk
+nmap <silent> ,ga :<c-u>CocCommand git.chunkStage<cr>
+" show chunk diff at current position
+nmap <silent> ,gs <Plug>(coc-git-chunkinfo)
+" show commit contains current position
+nmap <silent> ,gc <Plug>(coc-git-commit)
+" copy current line URL
+nmap <silent> ,gy :<c-u>CocCommand git.copyUrl<cr>
+" show cached diff
+nmap <silent> ,gC :<c-u>CocCommand git.diffCached<cr>

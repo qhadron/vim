@@ -159,9 +159,6 @@ Plug 'rbtnn/vim-vimscript_indentexpr'
 " git
 Plug 'tpope/vim-fugitive'
 
-" git diff
-Plug 'airblade/vim-gitgutter'
-
 """"""""""""""""""""""""""""""
 " => Programming
 """"""""""""""""""""""""""""""
@@ -201,6 +198,9 @@ let g:coc_global_extensions += ['coc-fzf-preview']
 " c/c++ and semantic highlighting
 let g:coc_global_extensions += ['coc-clangd']
 Plug 'jackguo380/vim-lsp-cxx-highlight'
+
+" git stuff
+let g:coc_global_extensions += ['coc-git']
 
 " comment/uncomment with proper escaping
 Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
