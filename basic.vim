@@ -19,13 +19,6 @@ try
 catch
 endtry
 
-" enable terminal colors
-try
-	set t_Co=256
-	set termguicolors
-catch
-endtry
-
 " Enable command-line tab completion
 set wildmenu
 set wildmode=list:longest,full
@@ -71,9 +64,7 @@ set scrolloff=7
 " Enable syntax highlighting
 syntax enable
 
-set background=dark
-
-" Set utf8 as standard encoding and en_US as the standard language
+" Set utf8 as standard encoding
 set encoding=utf8
 
 " Use Unix as the standard file type
@@ -98,7 +89,10 @@ catch
 endtry
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup basic_au
+	autocmd!
+	autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
@@ -198,13 +192,6 @@ let g:sh_fold_enabled=5 " &1 is functions, &2 is heredoc, &4 is ifdofor
 " => add command to diff the edited buffer with filesystem version
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 source $VIM_PREFIX/extras/diff_orig.vim
-
-""""""""""""""""""""""""""""""
-" => Disable vim's modifyOtherKeys option
-" not compatible everywhere
-""""""""""""""""""""""""""""""
-let &t_TI = ""
-let &t_TE = ""
 
 """"""""""""""""""""""""""""""
 " => Mode-dependent cursor
