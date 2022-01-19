@@ -102,7 +102,7 @@ let g:lightline = {
 			\ 'active': {
 			\   'left': [ [ 'mode', 'paste' ],
 			\             [ 'readonly', 'filename', 'fugitive' ],
-			\             [ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status'  ]],
+			\             [ 'coc_info', 'coc_hints', 'coc_errors', 'coc_warnings', 'coc_ok' ], [ 'coc_status' ]],
 			\   'right': [ [ 'lineinfo' ],
 			\              [ 'percent' ],
 			\              [ 'sleuth', 'fileformat', 'fileencoding', 'filetype'] ]
@@ -261,12 +261,13 @@ function! s:on_coc_load()
 
 	" Use K to show documentation in preview window.
 	nnoremap <silent> K :call <SID>show_documentation()<CR>
+	xnoremap <silent> K :call <SID>show_documentation()<CR>
 
 	function! s:show_documentation()
 		if (index(['vim','help'], &filetype) >= 0)
 			execute 'h '.expand('<cword>')
 		elseif (coc#rpc#ready())
-			call CocActionAsync('doHover')
+			call CocActionAsync('definitionHover')
 		else
 			execute '!' . &keywordprg . " " . expand('<cword>')
 		endif
@@ -281,6 +282,8 @@ function! s:on_coc_load()
 	" Formatting selected code.
 	xmap <leader>f  <Plug>(coc-format-selected)
 	nmap <leader>f  <Plug>(coc-format-selected)
+	" Formatting entire document
+	nmap <leader>F  <Plug>(coc-format)
 
 	augroup coc_autos
 		autocmd!
@@ -422,7 +425,7 @@ inoremap <expr> <c-x>s fzf#vim#complete(
 nnoremap <silent> <c-f> <nop>
 nnoremap <silent> <c-f><c-f>       :<C-u>FzfPreviewBuffersRpc<CR>
 nnoremap <silent> <c-f><space>     :<C-u>FzfPreviewDirectoryFilesRpc<CR>
-nnoremap <silent> <c-f>f           :<C-u>FzfPreviewFromResourcesRpc project_mru project git<CR>
+nnoremap <silent> <c-f>f           :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
 nnoremap <silent> <c-f>F           :<C-u>FzfPreviewLines<CR>
 nnoremap <silent> <c-f>gs          :<C-u>FzfPreviewGitStatusRpc<CR>
 nnoremap <silent> <c-f>ga          :<C-u>FzfPreviewGitActionsRpc<CR>
