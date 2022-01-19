@@ -610,7 +610,7 @@ let g:vimtex_compiler_latexmk = {
 augroup s:vimtex
 	autocmd!
 	autocmd User VimtexEventInitPost call s:on_vimtex_load()
-	autocmd User VimtexCompileStarted call s:vimtex_build_folder()
+	autocmd User VimtexEventCompileStarted call s:vimtex_build_folder()
 augroup END
 
 function! s:on_vimtex_load()
@@ -633,6 +633,10 @@ function! s:vimtex_build_folder()
 		" hide the folder if on windows-like systems
 		if executable('attrib.exe')
 			silent call system(join(['attrib.exe', '+h', '/s', '/d', g:vimtex_compiler_build_dir],' '))
+		endif
+		" hide the folder from dropbox
+		if executable('powershell.exe')
+			silent call system(join(['powershell.exe','-sta', 'Set-Content -Path '.g:vimtex_compiler_build_dir.' -Stream com.dropbox.ignored -Value 1']))
 		endif
 	endif
 	execute 'cd '.old_path
