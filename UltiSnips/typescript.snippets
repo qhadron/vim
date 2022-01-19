@@ -1,0 +1,23 @@
+snippet lit "lithtml class" bwm
+import { LitElement, html, css } from "lit";
+import { customElement } from "lit/decorators.js";
+
+const tag = "${1:`!p snip.rv=snip.basename`}";
+
+@customElement(tag)
+export default class ${2:`!p snip.rv=''.join(x.title() for x in t[1].split('-'))`} extends LitElement {
+${3:	static override styles = css\`
+		${4}
+	\`;
+	}
+	override render() {
+		return html\`${0:<div>Hello</div>}\`;
+	}
+}
+
+declare global {
+	interface HTMLElementTagNameMap {
+		[tag]: $2;
+	}
+}
+endsnippet
