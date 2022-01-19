@@ -780,8 +780,8 @@ let g:SimpylFold_docstring_preview = 1
 """"""""""""""""""""""""""""""
 " add disabled filetypes here
 " add <ft>.plugin to disable filetype highlighting without disabling detection
-let g:polyglot_disabled = []
-call plug#load('vim-polyglot')
+let g:polyglot_disabled = ['sensible']
+autocmd VimEnter * ++once call plug#load('vim-polyglot')
 
 """"""""""""""""""""""""""""""
 " => coc-git
