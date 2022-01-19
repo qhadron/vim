@@ -202,6 +202,9 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 " git stuff
 let g:coc_global_extensions += ['coc-git']
 
+" formatting
+let g:coc_global_extensions += ['coc-prettier']
+
 " comment/uncomment with proper escaping
 Plug 'tomtom/tcomment_vim', { 'as': 'tcomment' }
 

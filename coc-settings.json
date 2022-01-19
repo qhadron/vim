@@ -29,6 +29,15 @@
 		// use pyright instead
 		// "python": [ "autopep8", "isort", "docformatter" ]
 	},
+
+	"prettier.formatterPriority": 100,
+	"typescript.format.enabled": false,
+	"javascript.format.enabled": false,
+	"prettier.semi": true,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 4,
+	"prettier.trailingComma": "es5",
+	"prettier.requireConfig": true
 }
 
 
