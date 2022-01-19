@@ -128,6 +128,10 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 " paste images for markdown
 Plug 'ferrine/md-img-paste.vim', { 'as': 'md-img-paste', 'for': 'markdown' }
 
+" javscript template literals
+" requires vim-javascript, provided by vim-polyglot
+Plug 'jonsmithers/vim-html-template-literals'
+
 " LaTeX support
 if executable('latexmk')
 	Plug 'lervag/vimtex'

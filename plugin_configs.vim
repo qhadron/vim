@@ -813,3 +813,8 @@ nmap <silent> ,gc <Plug>(coc-git-commit)
 nmap <silent> ,gy :<c-u>CocCommand git.copyUrl<cr>
 " show cached diff
 nmap <silent> ,gC :<c-u>CocCommand git.diffCached<cr>
+
+""""""""""""""""""""""""""""""""
+" => vim-html-template-literals
+""""""""""""""""""""""""""""""""
+let g:htl_css_templates=1
