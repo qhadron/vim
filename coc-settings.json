@@ -29,6 +29,11 @@
 		// "python": [ "autopep8", "isort", "docformatter" ]
 	},
 
+	// coc-git
+	"git.showCommitInFloating": false,
+	"git.enableGutters": true,
+
+
 	"prettier.formatterPriority": 100,
 	"typescript.format.enabled": false,
 	"javascript.format.enabled": false,
