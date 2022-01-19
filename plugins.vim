@@ -117,6 +117,9 @@ Plug 'thaerkh/vim-workspace'
 " faster folds by updating slower
 Plug 'Konfekt/FastFold'
 
+" Search unicode characters
+Plug 'chrisbra/unicode.vim'
+
 " automatically use editor config
 Plug 'editorconfig/editorconfig-vim'
 
