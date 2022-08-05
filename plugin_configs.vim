@@ -423,22 +423,22 @@ inoremap <expr> <c-x>s fzf#vim#complete(
 " fzf mappings
 
 nnoremap <silent> <c-f> <nop>
-nnoremap <silent> <c-f><c-f>       :<C-u>FzfPreviewBuffersRpc<CR>
-nnoremap <silent> <c-f><space>     :<C-u>FzfPreviewDirectoryFilesRpc<CR>
-nnoremap <silent> <c-f>f           :<C-u>FzfPreviewFromResourcesRpc project_mru git<CR>
-nnoremap <silent> <c-f>F           :<C-u>FzfPreviewLines<CR>
-nnoremap <silent> <c-f>gs          :<C-u>FzfPreviewGitStatusRpc<CR>
-nnoremap <silent> <c-f>ga          :<C-u>FzfPreviewGitActionsRpc<CR>
-nnoremap <silent> <c-f>b           :<C-u>FzfPreviewAllBuffersRpc<CR>
-nnoremap <silent> <c-f><C-o>       :<C-u>FzfPreviewJumpsRpc<CR>
-nnoremap <silent> <c-f>d           :<C-u>FzfPreviewChangesRpc<CR>
-nnoremap <silent> <c-f>/           :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
-nnoremap <silent> <c-f>*           :<C-u>FzfPreviewLinesRpc --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
-nnoremap <silent> <c-f>l           :<C-u>FzfPreviewBufferLines<CR>
-nnoremap <silent> <c-f>L           :<C-u>FzfPreviewLocationListRpc<CR>
+nnoremap <silent> <c-f><c-f>       :<C-u>CocCommand fzf-preview.Buffers<CR>
+nnoremap <silent> <c-f><space>     :<C-u>CocCommand fzf-preview.DirectoryFiles<CR>
+nnoremap <silent> <c-f>f           :<C-u>CocCommand fzf-preview.FromResources<CR>
+nnoremap <silent> <c-f>F           :<C-u>CocCommand fzf-preview.Lines<CR>
+nnoremap <silent> <c-f>gs          :<C-u>CocCommand fzf-preview.GitStatus<CR>
+nnoremap <silent> <c-f>ga          :<C-u>CocCommand fzf-preview.GitActions<CR>
+nnoremap <silent> <c-f>b           :<C-u>CocCommand fzf-preview.AllBuffers<CR>
+nnoremap <silent> <c-f><C-o>       :<C-u>CocCommand fzf-preview.Jumps<CR>
+nnoremap <silent> <c-f>d           :<C-u>CocCommand fzf-preview.Changes<CR>
+nnoremap <silent> <c-f>/           :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> <c-f>*           :<C-u>CocCommand fzf-preview.Lines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap <silent> <c-f>l           :<C-u>CocCommand fzf-preview.BufferLines<CR>
+nnoremap <silent> <c-f>L           :<C-u>CocCommand fzf-preview.LocationList<CR>
 
-nnoremap          <c-g>            :<C-u>FzfPreviewProjectGrepRpc<Space>
-xnoremap          <c-g>            "sy:FzfPreviewProjectGrepRpc<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap          <c-g>            :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
+xnoremap          <c-g>            "sy:CocCommand fzf-preview.ProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
 " replace the old <c-g> functionality
 " -> show filename
 nnoremap          <f1>             <c-g>
