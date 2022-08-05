@@ -31,9 +31,9 @@ let g:EasyMotion_smartcase = 1
 """"""""""""""""""""""""""""""
 " => UltiSnips
 """"""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger='<c-l>'
-let g:UltiSnipsJumpBackwardTrigger='<c-j>'
-let g:UltiSnipsJumpForwardTrigger='<c-k>'
+let g:UltiSnipsExpandTrigger='<a-l>'
+let g:UltiSnipsJumpBackwardTrigger='<a-j>'
+let g:UltiSnipsJumpForwardTrigger='<a-k>'
 
 
 """""""""""""""""""""""""""""""""""""""""""
