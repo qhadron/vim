@@ -496,7 +496,7 @@ augroup s:nerd_tree
 augroup end
 
 " mapping to toggle nerdtree
-nnoremap <silent> <c-m-l> :NERDTreeToggle<cr>
+nnoremap <silent> <m-l> :NERDTreeToggle<cr>
 
 " natrual sort
 let g:NERDTreeNaturalSort = 1
