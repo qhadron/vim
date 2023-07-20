@@ -81,9 +81,10 @@ set autoindent
 set smartindent
 set wrap
 
-" Specify the behavior when switching between buffers
 try
-	set switchbuf=useopen,usetab,newtab
+	" Specify the behavior when switching between buffers
+	set switchbuf=useopen,usetab,vsplit,uselast
+	" always show tab line
 	set stal=2
 catch
 endtry
