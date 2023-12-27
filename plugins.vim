@@ -58,6 +58,9 @@ Plug 'scrooloose/nerdtree'
 " Similarly, load NERDTree git status plugin
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
+" tmux
+Plug 'christoomey/vim-tmux-navigator'
+
 """"""""""""""""""""""""""""""
 " => Editing
 """"""""""""""""""""""""""""""
