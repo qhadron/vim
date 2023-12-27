@@ -223,6 +223,20 @@ set shortmess+=c
 " enable semantic highlighting
 let g:coc_default_semantic_highlight_groups = 1
 
+
+" kill coc when not needed
+command! -bang CocStop call s:kill_coc(<bang>0)
+function! s:kill_coc(bang)
+	if a:bang
+		if get(g:, 'coc_process_pid', 0)
+			call system('kill -15 -'.g:coc_process_pid)
+			call system('kill -9 -'.g:coc_process_pid)
+		endif
+	else
+		call coc#rpc#kill()
+	endif
+endfunction
+
 autocmd User CocNvimInit call s:on_coc_load()
 " this is needed so that coc settings overwrite any other plugin's settings
 function! s:on_coc_load()
@@ -246,6 +260,10 @@ function! s:on_coc_load()
 	else
 		inoremap <silent><expr> <c-@> coc#refresh()
 	endif
+
+	" Use <cr> to confirm completion (needed for automatically inserting
+	" stuff)
+	inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 
 	" Use `[d` and `]d` to navigate diagnostics
 	" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.

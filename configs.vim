@@ -57,6 +57,10 @@ nnoremap <leader>Q :qa<cr>
 " Redraw
 map <F5> :redraw!<cr>
 
+" Word count
+nnoremap <F6> g<c-g>
+xnoremap <F6> g<c-g>
+
 " visual instead of audio bell
 set visualbell
 
