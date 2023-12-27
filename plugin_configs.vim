@@ -789,9 +789,9 @@ autocmd VimEnter * ++once call plug#load('vim-polyglot')
 " navigate chunks of current buffer
 nmap <silent> [g <Plug>(coc-git-prevchunk)
 nmap <silent> ]g <Plug>(coc-git-nextchunk)
-" navigate conflicts of current buffer
-nmap <silent> [c <Plug>(coc-git-prevconflict)
-nmap <silent> ]c <Plug>(coc-git-nextconflict)
+" navigate git conflicts of current buffer
+nmap <silent> [gc <Plug>(coc-git-prevconflict)
+nmap <silent> ]gc <Plug>(coc-git-nextconflict)
 
 " create text object for git chunks
 omap <silent> ig <Plug>(coc-git-chunk-inner)
