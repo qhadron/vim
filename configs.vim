@@ -118,10 +118,3 @@ if exists('+termguicolors')
 endif
 
 set colorcolumn=80
-
-" open file (or range of lines) in GitHub browser
-command! -range Gopen execute
-      \ '!cd ' . shellescape(fnamemodify(expand('%:p'), ':h'))
-      \ . ' && gh browse --branch $(git branch --show-current) '
-      \ . fnameescape(expand('%:t')) . ':'
-      \ . (<range> ? <line1> . '-' . <line2> : line('.'))
