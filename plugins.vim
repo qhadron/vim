@@ -235,4 +235,7 @@ else
 	echo "Need vim with +python3 to enable snippet support"
 endif
 
+" fugitive github extension
+Plug 'tpope/vim-rhubarb'
+
 call plug#end()
